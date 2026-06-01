@@ -28,12 +28,14 @@ h1,h2,h3{font-weight:600;letter-spacing:-0.28px}
 .nav-links a:hover{color:#2997ff}
 
 section{width:100%}
-.section-dark{background:transparent;color:#f5f5f7}
 .section-light{background:#f5f5f7;color:#1d1d1f}
+.section-dark{background:transparent;color:#f5f5f7}
 .section-content{max-width:980px;margin:0 auto;padding:100px 24px}
 
 .hero{padding-top:100px;text-align:center;position:relative}
+/* Hero 顶部扫描线 */
 .hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(ellipse,rgba(120,80,255,.15) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.hero-scanline{width:200px;height:1px;background:linear-gradient(90deg,transparent,rgba(120,80,255,.4),rgba(120,80,255,.7),rgba(120,80,255,.4),transparent);margin:0 auto 20px}
 .hero-tagline{font-size:17px;color:rgba(255,255,255,.65);margin-bottom:20px}
 .hero .display-hero{margin-bottom:12px}
 .hero .display-hero em{font-style:normal;color:#2997ff}
@@ -45,8 +47,12 @@ section{width:100%}
 .cta-solid:hover{background:#0077ed;border-color:#0077ed;color:#fff}
 
 .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:980px;margin:0 auto}
-.feature-card{background:rgba(120,80,255,.08);border:1px solid rgba(120,80,255,.15);border-radius:10px;padding:20px 10px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:all .25s}
-.feature-card:hover{background:rgba(120,80,255,.16);border-color:rgba(120,80,255,.3);transform:translateY(-4px)}
+.feature-card{background:rgba(120,80,255,.08);border:1px solid rgba(120,80,255,.15);border-radius:10px;padding:20px 10px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:all .25s;position:relative;overflow:hidden}
+.feature-card::before,.feature-card::after{content:'';position:absolute;width:20px;height:20px;transition:all .3s ease;opacity:0}
+.feature-card::before{top:-1px;left:-1px;border-top:2px solid #7850ff;border-left:2px solid #7850ff;border-radius:6px 0 0 0}
+.feature-card::after{bottom:-1px;right:-1px;border-bottom:2px solid #7850ff;border-right:2px solid #7850ff;border-radius:0 0 6px 0}
+.feature-card:hover::before,.feature-card:hover::after{opacity:1}
+.feature-card:hover{background:rgba(120,80,255,.16);border-color:rgba(120,80,255,.3);transform:translateY(-4px);box-shadow:0 0 24px rgba(120,80,255,.15)}
 .feature-icon{font-size:32px;line-height:1}
 .feature-text{font-size:13px;font-weight:500;color:#f5f5f7;text-align:center}
 
@@ -56,14 +62,18 @@ section{width:100%}
 .stat-label{font-size:14px;color:rgba(255,255,255,.6);margin-top:4px}
 
 .section-header{text-align:center;margin-bottom:64px}
-.section-header .section-heading{margin-bottom:16px}
+.section-header .section-heading{margin-bottom:16px;position:relative;display:inline-block}
+.section-header .section-heading::before{content:'';position:absolute;left:-20px;top:8px;bottom:8px;width:3px;background:linear-gradient(180deg,#7850ff,#2997ff);border-radius:2px}
 .section-header .body-text{max-width:600px;margin:0 auto}
 .section-light .section-header .body-text{color:rgba(0,0,0,.6)}
 .section-light .section-heading{color:#1d1d1f}
+.section-light .section-heading::before{background:linear-gradient(180deg,#0071e3,#42a5f5)}
 
 .scene-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.scene-card{background:#fff;border-radius:8px;padding:32px 28px;box-shadow:rgba(0,0,0,.22) 3px 5px 30px 0;transition:transform .25s}
-.scene-card:hover{transform:translateY(-4px)}
+.scene-card{background:#fff;border-radius:8px;padding:32px 28px;box-shadow:rgba(0,0,0,.22) 3px 5px 30px 0;transition:transform .25s,box-shadow .25s;position:relative}
+.scene-card::after{content:'';position:absolute;inset:0;border-radius:8px;border:2px solid transparent;transition:border-color .3s ease}
+.scene-card:hover{transform:translateY(-4px);box-shadow:rgba(120,80,255,.2) 0 8px 32px 0}
+.scene-card:hover::after{border-color:rgba(120,80,255,.25)}
 .scene-card .icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:22px}
 .scene-card .card-title{margin-bottom:8px;color:#1d1d1f}
 .scene-card .body-text{font-size:15px;color:rgba(0,0,0,.7);margin-bottom:16px;line-height:1.6}
@@ -125,6 +135,7 @@ footer .caption-text{margin-bottom:4px}
 
 <section class="section-dark hero">
   <div class="section-content">
+    <div class="hero-scanline"></div>
     <p class="hero-tagline">AI 个人助手，跑在你日常用的所有地方</p>
     <h1 class="display-hero">我是<em>小智</em></h1>
     <p class="sub-heading">你的24小时工作生活搭子。<br>在飞书里打理工作，在桌面上打理生活。</p>
