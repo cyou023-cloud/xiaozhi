@@ -45,10 +45,10 @@ section{width:100%}
 .cta-solid:hover{background:#0077ed;border-color:#0077ed;color:#fff}
 
 .feature-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;max-width:980px;margin:0 auto}
-.feature-card{background:rgba(120,80,255,.08);border:1px solid rgba(120,80,255,.15);border-radius:12px;padding:32px 16px;display:flex;flex-direction:column;align-items:center;gap:12px;transition:all .25s}
+.feature-card{background:rgba(120,80,255,.08);border:1px solid rgba(120,80,255,.15);border-radius:10px;padding:20px 10px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:all .25s}
 .feature-card:hover{background:rgba(120,80,255,.16);border-color:rgba(120,80,255,.3);transform:translateY(-4px)}
-.feature-icon{font-size:42px;line-height:1}
-.feature-text{font-size:15px;font-weight:500;color:#f5f5f7;text-align:center}
+.feature-icon{font-size:32px;line-height:1}
+.feature-text{font-size:13px;font-weight:500;color:#f5f5f7;text-align:center}
 
 .stats-row{display:flex;justify-content:center;gap:80px;margin-top:60px}
 .stat-item{text-align:center}
@@ -85,8 +85,10 @@ footer .caption-text{margin-bottom:4px}
 
 @media(max-width:834px){
   .display-hero{font-size:40px}.section-heading{font-size:32px}
-  .feature-grid{grid-template-columns:repeat(3,1fr);gap:12px}
-  .feature-card{padding:24px 12px}.feature-icon{font-size:36px}.feature-text{font-size:13px}
+  .feature-grid{grid-template-columns:repeat(3,1fr);gap:10px}
+  .feature-card{padding:16px 8px}
+  .feature-icon{font-size:28px}
+  .feature-text{font-size:11px}
   .scene-grid{grid-template-columns:repeat(2,1fr);gap:16px}
   .stats-row{gap:40px;flex-wrap:wrap}.nav-links{gap:20px}.section-content{padding:80px 20px}
 }
@@ -95,8 +97,8 @@ footer .caption-text{margin-bottom:4px}
   .hero{padding-top:80px}.hero-tagline{font-size:15px}.hero .sub-heading{max-width:100%}
   .hero-ctas{flex-direction:column;align-items:center}
   .hero-ctas a{width:100%;max-width:280px;justify-content:center}
-  .feature-grid{grid-template-columns:repeat(3,1fr);gap:10px}
-  .feature-card{padding:20px 8px;border-radius:10px}.feature-icon{font-size:32px}.feature-text{font-size:12px}
+  .feature-grid{grid-template-columns:repeat(3,1fr);gap:8px}
+  .feature-card{padding:14px 6px;border-radius:8px}.feature-icon{font-size:24px}.feature-text{font-size:10px}
   .scene-grid{grid-template-columns:1fr;gap:14px}
   .scene-card{padding:24px 20px}.scene-card .card-title{font-size:18px}
   .nav{padding:0}.nav-inner{padding:0 14px}.nav-links a{font-size:10px}.nav-links{gap:14px}
@@ -127,8 +129,8 @@ footer .caption-text{margin-bottom:4px}
     <h1 class="display-hero">我是<em>小智</em></h1>
     <p class="sub-heading">你的24小时工作生活搭子。<br>在飞书里打理工作，在桌面上打理生活。</p>
     <div class="hero-ctas">
-      <a href="#work" class="cta-solid cta-pill">看工作能力</a>
-      <a href="#life" class="cta-pill">看生活能力 →</a>
+      <a href="#work" class="cta-solid cta-pill">核心能力</a>
+      <a href="#flow" class="cta-pill">看我怎么做 →</a>
     </div>
     <div class="feature-grid" id="features">
       <div class="feature-card"><div class="feature-icon">📊</div><div class="feature-text">飞书多维表</div></div>
@@ -137,6 +139,12 @@ footer .caption-text{margin-bottom:4px}
       <div class="feature-card"><div class="feature-icon">🌐</div><div class="feature-text">网页搭建</div></div>
       <div class="feature-card"><div class="feature-icon">🤖</div><div class="feature-text">AI创作</div></div>
       <div class="feature-card"><div class="feature-icon">📽️</div><div class="feature-text">PPT生成</div></div>
+      <div class="feature-card"><div class="feature-icon">📁</div><div class="feature-text">文件整理</div></div>
+      <div class="feature-card"><div class="feature-icon">🎵</div><div class="feature-text">音乐播放</div></div>
+      <div class="feature-card"><div class="feature-icon">🎬</div><div class="feature-text">电影管理</div></div>
+      <div class="feature-card"><div class="feature-icon">📝</div><div class="feature-text">Office办公</div></div>
+      <div class="feature-card"><div class="feature-icon">🖥️</div><div class="feature-text">桌面操控</div></div>
+      <div class="feature-card"><div class="feature-icon">🔍</div><div class="feature-text">智能搜索</div></div>
     </div>
   </div>
 </section>
@@ -207,36 +215,39 @@ footer .caption-text{margin-bottom:4px}
     </div>
     <div class="scene-grid">
       <div class="scene-card">
-        <div class="icon" style="background:#e6f7ee;color:#27ae60">🌐</div>
-        <h3 class="card-title">一句话搭网站</h3>
+        <div class="icon" style="background:#e6f7ee;color:#27ae60">🎬</div>
+        <h3 class="card-title">素材自动整理</h3>
         <p class="body-text">
-          "帮我做一个产品介绍页，深色科技风"——小智写好完整的前后端代码，
-          自动部署到线上生成可访问链接。从<em>需求到上线</em>，不超过两分钟。
+          "帮我把今天拍的素材整理一下"——小智自动扫描文件夹，
+          <em>按内容主题分类</em>（空镜/人物/产品/花絮），统一规范命名，
+          重复素材去重。拍完回来，素材库已经整整齐齐。
         </p>
         <div class="tag-list">
-          <span class="tag">网页生成</span><span class="tag tag-blue">GitHub Pages</span><span class="tag">自动部署</span>
+          <span class="tag">主题分类</span><span class="tag">规范命名</span><span class="tag">去重</span><span class="tag">素材管理</span>
         </div>
       </div>
       <div class="scene-card">
-        <div class="icon" style="background:#e6f7ee;color:#27ae60">⏰</div>
-        <h3 class="card-title">定时任务：设好就忘</h3>
+        <div class="icon" style="background:#e6f7ee;color:#27ae60">🎵</div>
+        <h3 class="card-title">音乐随心播放</h3>
         <p class="body-text">
-          每天早上9点自动生成经营日报推送到群；每周五自动汇总周报；
-          月底自动备份多维表数据。你只需要<em>设一次规则</em>，小智永远不迟到。
+          "放点适合写代码的音乐" / "播周杰伦的晴天"——小智
+          <em>打开你的音乐 App</em>，找到歌单开始播放。不用切窗口、
+          不用搜索，一句话音乐就响起来。
         </p>
         <div class="tag-list">
-          <span class="tag">定时任务</span><span class="tag">自动推送</span><span class="tag">数据备份</span><span class="tag">永不遗漏</span>
+          <span class="tag">语音控制</span><span class="tag">歌单管理</span><span class="tag">跨 App</span>
         </div>
       </div>
       <div class="scene-card">
-        <div class="icon" style="background:#fef0e6;color:#e67e22">🛡️</div>
-        <h3 class="card-title">文档安全审核</h3>
+        <div class="icon" style="background:#e6f7ee;color:#27ae60">📊</div>
+        <h3 class="card-title">数据分析</h3>
         <p class="body-text">
-          合同、方案、报价单——扔给小智，它自动<em>检查条款漏洞、数据矛盾、
-          格式合规</em>，标出风险点并给出修改建议。比人工校对快10倍。
+          "帮我算一下这个季度每个月的平均销售额" / "把重复数据标红"——
+          小智<em>操作你的 Excel</em>，公式自动填、图表自动画、
+          数据透视不用背函数。
         </p>
         <div class="tag-list">
-          <span class="tag">合同审核</span><span class="tag">风险标注</span><span class="tag">合规检查</span>
+          <span class="tag">Excel 操作</span><span class="tag">图表生成</span><span class="tag">数据透视</span>
         </div>
       </div>
     </div>
