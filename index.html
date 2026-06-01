@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>你好，小智 — 你的24小时工作生活搭子</title>
+<title>我是小智 — 你的24小时工作生活搭子</title>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
 body{
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;
-  background:linear-gradient(135deg,#0f0c29 0%,#1a1040 30%,#0d0d1a 70%,#0a0a12 100%);color:#f5f5f7;line-height:1.47;letter-spacing:-0.374px
+  background:linear-gradient(135deg,#0f0c29 0%,#1a1040 30%,#0d0d1a 70%,#0a0a12 100%);
+  color:#f5f5f7;line-height:1.47;letter-spacing:-0.374px
 }
 h1,h2,h3{font-weight:600;letter-spacing:-0.28px}
 .display-hero{font-size:56px;font-weight:700;line-height:1.07;letter-spacing:-0.28px}
@@ -19,24 +20,11 @@ h1,h2,h3{font-weight:600;letter-spacing:-0.28px}
 .body-text{font-size:17px;color:rgba(255,255,255,.7)}
 .caption-text{font-size:14px;color:rgba(255,255,255,.48);letter-spacing:-.224px}
 
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;height:48px;
-  background:rgba(0,0,0,.85);backdrop-filter:saturate(180%) blur(20px);
-  -webkit-backdrop-filter:saturate(180%) blur(20px);
-  display:flex;align-items:center;justify-content:center
-}
-.nav-inner{
-  width:100%;max-width:980px;display:flex;align-items:center;
-  justify-content:space-between;padding:0 22px
-}
-.nav-logo{
-  font-size:17px;font-weight:500;color:#f5f5f7;text-decoration:none;
-  display:flex;align-items:center;gap:8px
-}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:48px;background:rgba(0,0,0,.85);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);display:flex;align-items:center;justify-content:center}
+.nav-inner{width:100%;max-width:980px;display:flex;align-items:center;justify-content:space-between;padding:0 22px}
+.nav-logo{font-size:17px;font-weight:500;color:#f5f5f7;text-decoration:none;display:flex;align-items:center;gap:8px}
 .nav-links{display:flex;gap:32px;list-style:none}
-.nav-links a{
-  font-size:12px;font-weight:400;color:#f5f5f7;text-decoration:none;transition:color .2s
-}
+.nav-links a{font-size:12px;font-weight:400;color:#f5f5f7;text-decoration:none;transition:color .2s}
 .nav-links a:hover{color:#2997ff}
 
 section{width:100%}
@@ -45,38 +33,22 @@ section{width:100%}
 .section-content{max-width:980px;margin:0 auto;padding:100px 24px}
 
 .hero{padding-top:100px;text-align:center;position:relative}
-.hero::before{
-  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:700px;height:700px;
-  background:radial-gradient(ellipse,rgba(120,80,255,.15) 0%,transparent 70%);
-  border-radius:50%;pointer-events:none
-}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(ellipse,rgba(120,80,255,.15) 0%,transparent 70%);border-radius:50%;pointer-events:none}
 .hero-tagline{font-size:17px;color:rgba(255,255,255,.65);margin-bottom:20px}
 .hero .display-hero{margin-bottom:12px}
 .hero .display-hero em{font-style:normal;color:#2997ff}
 .hero .sub-heading{color:rgba(255,255,255,.7);max-width:640px;margin:0 auto 36px}
-.hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-.cta-pill{
-  display:inline-flex;align-items:center;gap:6px;font-size:17px;font-weight:400;
-  color:#fff;text-decoration:none;padding:8px 15px;border-radius:980px;
-  border:1px solid rgba(255,255,255,.4);transition:all .25s
-}
+.hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:60px}
+.cta-pill{display:inline-flex;align-items:center;gap:6px;font-size:17px;font-weight:400;color:#fff;text-decoration:none;padding:8px 15px;border-radius:980px;border:1px solid rgba(255,255,255,.4);transition:all .25s}
 .cta-pill:hover{border-color:#2997ff;color:#2997ff}
 .cta-solid{background:#0071e3;border-color:#0071e3;color:#fff;border-radius:980px}
 .cta-solid:hover{background:#0077ed;border-color:#0077ed;color:#fff}
 
-.feature-grid{
-  display:grid;grid-template-columns:repeat(6,1fr);gap:16px;
-  max-width:980px;margin:60px auto 0
-}
-.feature-card{
-  background:rgba(120,80,255,.08);border:1px solid rgba(120,80,255,.15);
-  border-radius:12px;padding:32px 16px;display:flex;flex-direction:column;
-  align-items:center;gap:14px;transition:all .25s
-}
+.feature-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;max-width:980px;margin:0 auto}
+.feature-card{background:rgba(120,80,255,.08);border:1px solid rgba(120,80,255,.15);border-radius:12px;padding:32px 16px;display:flex;flex-direction:column;align-items:center;gap:12px;transition:all .25s}
 .feature-card:hover{background:rgba(120,80,255,.16);border-color:rgba(120,80,255,.3);transform:translateY(-4px)}
-.feature-icon{font-size:44px;line-height:1}
-.feature-text{font-size:15px;font-weight:500;color:#f5f5f7}
+.feature-icon{font-size:42px;line-height:1}
+.feature-text{font-size:15px;font-weight:500;color:#f5f5f7;text-align:center}
 
 .stats-row{display:flex;justify-content:center;gap:80px;margin-top:60px}
 .stat-item{text-align:center}
@@ -90,26 +62,17 @@ section{width:100%}
 .section-light .section-heading{color:#1d1d1f}
 
 .scene-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.scene-card{
-  background:#fff;border-radius:8px;padding:32px 28px;
-  box-shadow:rgba(0,0,0,.22) 3px 5px 30px 0;transition:transform .25s
-}
+.scene-card{background:#fff;border-radius:8px;padding:32px 28px;box-shadow:rgba(0,0,0,.22) 3px 5px 30px 0;transition:transform .25s}
 .scene-card:hover{transform:translateY(-4px)}
-.scene-card .icon{
-  width:48px;height:48px;border-radius:10px;display:flex;
-  align-items:center;justify-content:center;margin-bottom:20px;font-size:22px
-}
+.scene-card .icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:22px}
 .scene-card .card-title{margin-bottom:8px;color:#1d1d1f}
-.scene-card .body-text{font-size:15px;color:rgba(0,0,0,.7);margin-bottom:16px}
+.scene-card .body-text{font-size:15px;color:rgba(0,0,0,.7);margin-bottom:16px;line-height:1.6}
 .scene-card .body-text em{font-style:normal;color:#0071e3;font-weight:500}
 .tag-list{display:flex;flex-wrap:wrap;gap:6px}
 .tag{font-size:12px;padding:3px 10px;border-radius:980px;background:#f5f5f7;color:#1d1d1f}
 .tag-blue{background:#e8f0fe!important;color:#0071e3!important}
 
-.flow-section{
-  padding:100px 24px;text-align:center;position:relative;
-  background:linear-gradient(135deg,rgba(120,80,255,.12) 0%,rgba(60,40,140,.08) 50%,rgba(10,10,20,.6) 100%)
-}
+.flow-section{padding:100px 24px;text-align:center;position:relative;background:linear-gradient(135deg,rgba(120,80,255,.12) 0%,rgba(60,40,140,.08) 50%,rgba(10,10,20,.6) 100%)}
 .flow-diagram{max-width:800px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
 .flow-step{background:#fff;border-radius:8px;padding:20px 24px;box-shadow:rgba(0,0,0,.22) 3px 5px 30px 0;min-width:120px;transition:transform .25s ease,box-shadow .25s ease;cursor:default}
 .flow-step:hover{transform:translateY(-6px);box-shadow:rgba(120,80,255,.3) 0 8px 32px 0}
@@ -121,46 +84,26 @@ footer{background:transparent;border-top:1px solid rgba(120,80,255,.12);padding:
 footer .caption-text{margin-bottom:4px}
 
 @media(max-width:834px){
-  .display-hero{font-size:40px}
-  .section-heading{font-size:32px}
+  .display-hero{font-size:40px}.section-heading{font-size:32px}
   .feature-grid{grid-template-columns:repeat(3,1fr);gap:12px}
-  .feature-card{padding:24px 12px}
-  .feature-icon{font-size:36px}
-  .feature-text{font-size:13px}
+  .feature-card{padding:24px 12px}.feature-icon{font-size:36px}.feature-text{font-size:13px}
   .scene-grid{grid-template-columns:repeat(2,1fr);gap:16px}
-  .stats-row{gap:40px;flex-wrap:wrap}
-  .nav-links{gap:20px}
-  .section-content{padding:80px 20px}
+  .stats-row{gap:40px;flex-wrap:wrap}.nav-links{gap:20px}.section-content{padding:80px 20px}
 }
 @media(max-width:480px){
-  .display-hero{font-size:30px}
-  .section-heading{font-size:24px}
-  .sub-heading{font-size:17px}
-  .hero{padding-top:80px}
-  .hero-tagline{font-size:15px}
-  .hero .sub-heading{max-width:100%}
+  .display-hero{font-size:30px}.section-heading{font-size:24px}.sub-heading{font-size:17px}
+  .hero{padding-top:80px}.hero-tagline{font-size:15px}.hero .sub-heading{max-width:100%}
   .hero-ctas{flex-direction:column;align-items:center}
   .hero-ctas a{width:100%;max-width:280px;justify-content:center}
   .feature-grid{grid-template-columns:repeat(3,1fr);gap:10px}
-  .feature-card{padding:20px 8px;border-radius:10px}
-  .feature-icon{font-size:32px}
-  .feature-text{font-size:12px}
+  .feature-card{padding:20px 8px;border-radius:10px}.feature-icon{font-size:32px}.feature-text{font-size:12px}
   .scene-grid{grid-template-columns:1fr;gap:14px}
-  .scene-card{padding:24px 20px}
-  .scene-card .card-title{font-size:18px}
-  .nav{padding:0}
-  .nav-inner{padding:0 14px}
-  .nav-links a{font-size:10px}
-  .nav-links{gap:14px}
-  .stats-row{gap:20px}
-  .stat-number{font-size:28px}
-  .stat-label{font-size:12px}
-  .flow-diagram{flex-direction:column;gap:10px}
-  .flow-arrow{transform:rotate(90deg)}
+  .scene-card{padding:24px 20px}.scene-card .card-title{font-size:18px}
+  .nav{padding:0}.nav-inner{padding:0 14px}.nav-links a{font-size:10px}.nav-links{gap:14px}
+  .stats-row{gap:20px}.stat-number{font-size:28px}.stat-label{font-size:12px}
+  .flow-diagram{flex-direction:column;gap:10px}.flow-arrow{transform:rotate(90deg)}
   .flow-step{min-width:0;width:100%;max-width:260px}
-  .section-content{padding:60px 16px}
-  .flow-section{padding:60px 16px}
-  footer{padding:32px 16px}
+  .section-content{padding:60px 16px}.flow-section{padding:60px 16px}footer{padding:32px 16px}
 }
 </style>
 </head>
@@ -170,7 +113,7 @@ footer .caption-text{margin-bottom:4px}
   <div class="nav-inner">
     <a href="#" class="nav-logo">🤖 小智</a>
     <ul class="nav-links">
-      <li><a href="#features">功能</a></li>
+      <li><a href="#features">核心能力</a></li>
       <li><a href="#work">工作场景</a></li>
       <li><a href="#life">生活场景</a></li>
       <li><a href="#flow">工作流</a></li>
@@ -181,20 +124,19 @@ footer .caption-text{margin-bottom:4px}
 <section class="section-dark hero">
   <div class="section-content">
     <p class="hero-tagline">AI 个人助手，跑在你日常用的所有地方</p>
-    <h1 class="display-hero">你好，<em>小智</em></h1>
+    <h1 class="display-hero">我是<em>小智</em></h1>
     <p class="sub-heading">你的24小时工作生活搭子。<br>在飞书里打理工作，在桌面上打理生活。</p>
     <div class="hero-ctas">
-      <a href="#work" class="cta-solid cta-pill">看看能做什么</a>
-      <a href="#flow" class="cta-pill">怎么工作的 →</a>
+      <a href="#work" class="cta-solid cta-pill">看工作能力</a>
+      <a href="#life" class="cta-pill">看生活能力 →</a>
     </div>
-
     <div class="feature-grid" id="features">
       <div class="feature-card"><div class="feature-icon">📊</div><div class="feature-text">飞书多维表</div></div>
-      <div class="feature-card"><div class="feature-icon">📄</div><div class="feature-text">飞书文档</div></div>
-      <div class="feature-card"><div class="feature-icon">📁</div><div class="feature-text">文件整理</div></div>
-      <div class="feature-card"><div class="feature-icon">🎵</div><div class="feature-text">音乐播放</div></div>
-      <div class="feature-card"><div class="feature-icon">🎬</div><div class="feature-text">电影管理</div></div>
-      <div class="feature-card"><div class="feature-icon">📝</div><div class="feature-text">Office办公</div></div>
+      <div class="feature-card"><div class="feature-icon">📈</div><div class="feature-text">数据分析</div></div>
+      <div class="feature-card"><div class="feature-icon">📄</div><div class="feature-text">方案生成</div></div>
+      <div class="feature-card"><div class="feature-icon">🌐</div><div class="feature-text">网页搭建</div></div>
+      <div class="feature-card"><div class="feature-icon">🤖</div><div class="feature-text">AI创作</div></div>
+      <div class="feature-card"><div class="feature-icon">📽️</div><div class="feature-text">PPT生成</div></div>
     </div>
   </div>
 </section>
@@ -213,27 +155,45 @@ footer .caption-text{margin-bottom:4px}
 <section class="section-light" id="work">
   <div class="section-content">
     <div class="section-header">
-      <h2 class="section-heading">在飞书里，小智是你最好的工作搭档</h2>
-      <p class="body-text">不用学新工具。小智直接住在飞书里，你说句话它就帮你搞定。</p>
+      <h2 class="section-heading">工作场景：不只省时间，是替你扛活</h2>
+      <p class="body-text">不是简单的问答助手。小智接管的是完整的业务环节。</p>
     </div>
     <div class="scene-grid">
       <div class="scene-card">
-        <div class="icon" style="background:#e8f0fe;color:#0071e3">📥</div>
-        <h3 class="card-title">数据自动录入</h3>
-        <p class="body-text">客户发来消息，小智自动把信息填进<em>多维表格</em>对应行，不用手动复制粘贴。</p>
-        <div class="tag-list"><span class="tag tag-blue">飞书多维表格</span><span class="tag">自动填充</span></div>
+        <div class="icon" style="background:#e8f0fe;color:#0071e3">🔄</div>
+        <h3 class="card-title">全流程方案自动化</h3>
+        <p class="body-text">
+          客户填飞书表单 → 小智<em>自动拉取货盘数据</em> → 分析成本与毛利 →
+          生成HTML方案网页+飞书文档双版本 → <em>回填多维表格</em> → 推送到客户群。<br>
+          整条链路无人值守，你只需要在关键节点确认。
+        </p>
+        <div class="tag-list">
+          <span class="tag tag-blue">飞书多维表格</span><span class="tag tag-blue">飞书文档</span><span class="tag">HTML方案</span><span class="tag">自动推送</span>
+        </div>
       </div>
       <div class="scene-card">
-        <div class="icon" style="background:#e8f0fe;color:#0071e3">📈</div>
-        <h3 class="card-title">日报自动推送</h3>
-        <p class="body-text">每天早9点自动拉取数据生成<em>可视化日报</em>发到群里。领导问起来，数据已经有了。</p>
-        <div class="tag-list"><span class="tag tag-blue">飞书消息</span><span class="tag">定时任务</span></div>
+        <div class="icon" style="background:#e8f0fe;color:#0071e3">🔗</div>
+        <h3 class="card-title">跨表数据关联分析</h3>
+        <p class="body-text">
+          客户表、货盘表、报价表<em>跨表打通</em> → 自动关联计算单品利润 →
+          生成经营仪表盘 → 异常数据自动预警发群。<br>
+          不用在多个表之间来回 VLOOKUP。
+        </p>
+        <div class="tag-list">
+          <span class="tag tag-blue">多维表格</span><span class="tag">跨表关联</span><span class="tag">异常预警</span><span class="tag">经营仪表盘</span>
+        </div>
       </div>
       <div class="scene-card">
-        <div class="icon" style="background:#e8f0fe;color:#0071e3">📄</div>
-        <h3 class="card-title">方案文档一秒生成</h3>
-        <p class="body-text">从多维表拉货盘和报价，<em>自动生成完整方案文档</em>——图文并茂，不用动一个标点。</p>
-        <div class="tag-list"><span class="tag tag-blue">飞书文档</span><span class="tag tag-blue">多维表格</span><span class="tag">AI 生成</span></div>
+        <div class="icon" style="background:#e8f0fe;color:#0071e3">🚀</div>
+        <h3 class="card-title">批量内容生产车间</h3>
+        <p class="body-text">
+          "帮我生产6月份漂流项目的全部短视频内容"——<em>选题策划→脚本创作→
+          分镜设计→发布排期</em>，一条指令跑通整条生产线。<br>
+          适配抖音官号+小红书双平台发布计划。
+        </p>
+        <div class="tag-list">
+          <span class="tag tag-blue">飞书文档</span><span class="tag">选题策划</span><span class="tag">脚本生成</span><span class="tag">排期管理</span>
+        </div>
       </div>
     </div>
   </div>
@@ -242,27 +202,42 @@ footer .caption-text{margin-bottom:4px}
 <section class="section-light" id="life">
   <div class="section-content">
     <div class="section-header">
-      <h2 class="section-heading">在桌面上，小智是你的数字管家</h2>
-      <p class="body-text">文件整理、音乐电影、Office 办公——一句话就办好。</p>
+      <h2 class="section-heading">生活场景：不是玩具，是真能办事</h2>
+      <p class="body-text">真正改变日常生活效率的能力，每一项都能单独拿出来卖。</p>
     </div>
     <div class="scene-grid">
       <div class="scene-card">
-        <div class="icon" style="background:#e6f7ee;color:#27ae60">📁</div>
-        <h3 class="card-title">桌面自动整理</h3>
-        <p class="body-text">零散文件按<em>类型分类归档</em>：截图放截图、PDF 放文档。三秒清爽。</p>
-        <div class="tag-list"><span class="tag">桌面整理</span><span class="tag">文件分类</span></div>
+        <div class="icon" style="background:#e6f7ee;color:#27ae60">🌐</div>
+        <h3 class="card-title">一句话搭网站</h3>
+        <p class="body-text">
+          "帮我做一个产品介绍页，深色科技风"——小智写好完整的前后端代码，
+          自动部署到线上生成可访问链接。从<em>需求到上线</em>，不超过两分钟。
+        </p>
+        <div class="tag-list">
+          <span class="tag">网页生成</span><span class="tag tag-blue">GitHub Pages</span><span class="tag">自动部署</span>
+        </div>
       </div>
       <div class="scene-card">
-        <div class="icon" style="background:#e6f7ee;color:#27ae60">🎵</div>
-        <h3 class="card-title">音乐随心播</h3>
-        <p class="body-text">"放点适合写代码的音乐"，它<em>打开音乐 App</em>，找到歌单开始播放。</p>
-        <div class="tag-list"><span class="tag">音乐播放</span><span class="tag">歌单管理</span></div>
+        <div class="icon" style="background:#e6f7ee;color:#27ae60">⏰</div>
+        <h3 class="card-title">定时任务：设好就忘</h3>
+        <p class="body-text">
+          每天早上9点自动生成经营日报推送到群；每周五自动汇总周报；
+          月底自动备份多维表数据。你只需要<em>设一次规则</em>，小智永远不迟到。
+        </p>
+        <div class="tag-list">
+          <span class="tag">定时任务</span><span class="tag">自动推送</span><span class="tag">数据备份</span><span class="tag">永不遗漏</span>
+        </div>
       </div>
       <div class="scene-card">
-        <div class="icon" style="background:#e6f7ee;color:#27ae60">📊</div>
-        <h3 class="card-title">Excel 数据分析</h3>
-        <p class="body-text">"算一下平均销售额"，它<em>操作 Excel</em>，公式自动填、图表自动画。</p>
-        <div class="tag-list"><span class="tag">Office</span><span class="tag">数据分析</span></div>
+        <div class="icon" style="background:#fef0e6;color:#e67e22">🛡️</div>
+        <h3 class="card-title">文档安全审核</h3>
+        <p class="body-text">
+          合同、方案、报价单——扔给小智，它自动<em>检查条款漏洞、数据矛盾、
+          格式合规</em>，标出风险点并给出修改建议。比人工校对快10倍。
+        </p>
+        <div class="tag-list">
+          <span class="tag">合同审核</span><span class="tag">风险标注</span><span class="tag">合规检查</span>
+        </div>
       </div>
     </div>
   </div>
@@ -272,16 +247,16 @@ footer .caption-text{margin-bottom:4px}
   <div class="flow-section">
     <div class="section-header">
       <h2 class="section-heading">一句话，全搞定</h2>
-      <p class="body-text">你说需求，剩下的小智自己跑通。</p>
+      <p class="body-text">不只回答问题，而是把事办完、把结果交到你手里。</p>
     </div>
     <div class="flow-diagram">
       <div class="flow-step"><div class="step-num">STEP 01</div><div class="body-text">你说话或发消息</div></div>
       <span class="flow-arrow">→</span>
-      <div class="flow-step"><div class="step-num">STEP 02</div><div class="body-text">小智理解需求</div></div>
+      <div class="flow-step"><div class="step-num">STEP 02</div><div class="body-text">小智分析并规划</div></div>
       <span class="flow-arrow">→</span>
-      <div class="flow-step"><div class="step-num">STEP 03</div><div class="body-text">自动执行操作</div></div>
+      <div class="flow-step"><div class="step-num">STEP 03</div><div class="body-text">自动调用工具链</div></div>
       <span class="flow-arrow">→</span>
-      <div class="flow-step"><div class="step-num">STEP 04</div><div class="body-text">结果交给你</div></div>
+      <div class="flow-step"><div class="step-num">STEP 04</div><div class="body-text">结果交付给你</div></div>
     </div>
   </div>
 </section>
