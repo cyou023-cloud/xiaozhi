@@ -288,6 +288,14 @@ button{cursor:pointer}
 }
 .hl-zoom-controls button:last-child{border-right:none}
 .hl-zoom-controls button:hover{color:var(--cinnabar);background:rgba(184,56,42,0.04)}
+.hl-zoom-label{
+  display:flex;align-items:center;justify-content:center;
+  min-width:46px;padding:0 6px;
+  font-family:var(--mono-font);font-size:11px;
+  color:var(--ink-faint);letter-spacing:0.02em;
+  border-right:1px solid var(--border-subtle);
+  user-select:none;
+}
 /* === Graph SVG === */
 .hl-character-graph{width:100%;height:100%}
 .hl-character-graph svg{width:100%;height:100%;display:block;cursor:grab;touch-action:none}
@@ -1184,6 +1192,7 @@ body {
           <div class="hl-graph-legend" id="hlGraphLegend"></div>
           <div class="hl-zoom-controls" aria-label="缩放控制">
             <button type="button" id="hlZoomIn" title="放大">＋</button>
+            <span class="hl-zoom-label" id="hlZoomLabel">100%</span>
             <button type="button" id="hlZoomOut" title="缩小">－</button>
           </div>
         </div>
@@ -1880,6 +1889,7 @@ HonglouApp.characterGraph = (() => {
 ];
   let svg, rootLayer, bandLayer, gridLayer, linkLayer, linkLabelLayer, nodeLayer, generationLabelLayer;
   let simulation, linkGroup, linkLabelGroup, nodeGroup, zoomBehavior;
+  let currentZoom = 1;
   let width = 960;
   let height = 720;
   let genMode = false;
@@ -1924,7 +1934,11 @@ HonglouApp.characterGraph = (() => {
     linkLabelLayer = rootLayer.append('g');
     nodeLayer = rootLayer.append('g');
     generationLabelLayer = rootLayer.append('g');
-    zoomBehavior = d3.zoom().scaleExtent([0.14, 5]).on('zoom', (event) => rootLayer.attr('transform', event.transform));
+    zoomBehavior = d3.zoom().scaleExtent([0.14, 5]).on('zoom', (event) => {
+      rootLayer.attr('transform', event.transform);
+      currentZoom = event.transform.k;
+      updateZoomLabel();
+    });
     svg.call(zoomBehavior);
 
     simulation = d3.forceSimulation(nodes)
@@ -2057,13 +2071,19 @@ HonglouApp.characterGraph = (() => {
     document.getElementById('hlGenerationViewBtn').addEventListener('click', setGenerationView);
     document.getElementById('hlResetGraphBtn').addEventListener('click', resetView);
     document.getElementById('hlZoomIn').addEventListener('click', () => {
-      if (fallbackMode) zoomFallback(1.22);
-      else svg.transition().duration(260).call(zoomBehavior.scaleBy, 1.28);
+      if (fallbackMode) { zoomFallback(1.22); updateZoomLabel(); }
+      else svg.transition().duration(260).call(zoomBehavior.scaleBy, 1.28).on('end', () => { currentZoom = d3.zoomTransform(svg.node()).k; updateZoomLabel(); });
     });
     document.getElementById('hlZoomOut').addEventListener('click', () => {
-      if (fallbackMode) zoomFallback(0.82);
-      else svg.transition().duration(260).call(zoomBehavior.scaleBy, 0.76);
+      if (fallbackMode) { zoomFallback(0.82); updateZoomLabel(); }
+      else svg.transition().duration(260).call(zoomBehavior.scaleBy, 0.76).on('end', () => { currentZoom = d3.zoomTransform(svg.node()).k; updateZoomLabel(); });
     });
+  }
+
+  function updateZoomLabel() {
+    const pct = Math.round(currentZoom * 100);
+    const el = document.getElementById('hlZoomLabel');
+    if (el) el.textContent = pct + '%';
   }
 
   function renderLegend() {
@@ -2346,6 +2366,8 @@ HonglouApp.characterGraph = (() => {
       fallbackTransform.scale = nextScale;
       fallbackTransform.x = mouseX - graphX * nextScale;
       fallbackTransform.y = mouseY - graphY * nextScale;
+      currentZoom = nextScale;
+      updateZoomLabel();
       setFallbackTransform();
       event.preventDefault();
     }, { passive: false });
@@ -2362,6 +2384,8 @@ HonglouApp.characterGraph = (() => {
 
   function zoomFallback(factor) {
     fallbackTransform.scale = Math.max(0.35, Math.min(2.6, fallbackTransform.scale * factor));
+    currentZoom = fallbackTransform.scale;
+    updateZoomLabel();
     setFallbackTransform();
   }
 
