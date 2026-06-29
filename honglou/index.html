@@ -2030,8 +2030,11 @@ HonglouApp.characterGraph = (() => {
     });
 
     window.addEventListener('resize', resize);
+    // 初始缩放固定为 100%，不自动缩放
+    svg.call(zoomBehavior.transform, d3.zoomIdentity);
+    currentZoom = 1;
+    updateZoomLabel();
     HonglouApp.state.graphReady = true;
-  }
 
   function isMajorFemale(d) {
     return ['黛玉','宝钗','元春','探春','湘云','妙玉','迎春','惜春','凤姐','巧姐','李纨','可卿'].some(name => d.name.includes(name));
