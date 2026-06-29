@@ -1901,7 +1901,7 @@ HonglouApp.characterGraph = (() => {
   let fallbackTransform = { x: 0, y: 0, scale: 1 };
   let fallbackDragState = null;
   let graphControlsBound = false;
-  const genColors = ['rgba(190,160,120,0.12)', 'rgba(200,150,140,0.12)', 'rgba(120,150,190,0.12)', 'rgba(110,170,130,0.12)', 'rgba(165,140,190,0.12)'];
+  const genColors = ['rgba(190,160,120,0.28)', 'rgba(200,150,140,0.28)', 'rgba(120,150,190,0.28)', 'rgba(110,170,130,0.28)', 'rgba(165,140,190,0.28)'];
   const genBands = [0.06, 0.21, 0.38, 0.57, 0.79];
   const genNames = ['始祖辈', '代字辈', '文字辈', '玉字辈', '草字辈'];
 
@@ -2120,13 +2120,23 @@ HonglouApp.characterGraph = (() => {
         .attr('y', y1)
         .attr('height', y2 - y1)
         .attr('fill', genColors[index]);
+      generationLabelLayer.append('rect')
+        .attr('x', 20)
+        .attr('y', (y1 + y2) / 2 - 14)
+        .attr('width', 116)
+        .attr('height', 28)
+        .attr('rx', 4)
+        .attr('fill', 'rgba(44,36,24,0.55)')
+        .attr('stroke', 'rgba(228,201,121,0.5)')
+        .attr('stroke-width', 1);
       generationLabelLayer.append('text')
         .attr('x', 78)
         .attr('y', (y1 + y2) / 2 + 5)
         .attr('text-anchor', 'middle')
-        .attr('fill', '#e4c979')
-        .attr('font-size', '14px')
-        .attr('font-weight', '800')
+        .attr('fill', '#f2dfb8')
+        .attr('font-size', '18px')
+        .attr('font-weight', '900')
+        .attr('letter-spacing', '3px')
         .text(genNames[index]);
       if (index < genNames.length - 1) {
         gridLayer.append('line')
@@ -2253,12 +2263,23 @@ HonglouApp.characterGraph = (() => {
       rect.setAttribute('height', y2 - y1);
       rect.setAttribute('fill', genColors[index]);
       fallbackRoot.appendChild(rect);
+      const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      bg.setAttribute('x', 20);
+      bg.setAttribute('y', (y1 + y2) / 2 - 14);
+      bg.setAttribute('width', 116);
+      bg.setAttribute('height', 28);
+      bg.setAttribute('rx', 4);
+      bg.setAttribute('fill', 'rgba(44,36,24,0.55)');
+      bg.setAttribute('stroke', 'rgba(228,201,121,0.5)');
+      bg.setAttribute('stroke-width', '1');
+      fallbackRoot.appendChild(bg);
       const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      text.setAttribute('x', 76);
+      text.setAttribute('x', 78);
       text.setAttribute('y', (y1 + y2) / 2 + 5);
-      text.setAttribute('fill', '#e4c979');
-      text.setAttribute('font-size', '14');
-      text.setAttribute('font-weight', '800');
+      text.setAttribute('fill', '#f2dfb8');
+      text.setAttribute('font-size', '18');
+      text.setAttribute('font-weight', '900');
+      text.setAttribute('letter-spacing', '3');
       text.setAttribute('text-anchor', 'middle');
       text.textContent = genNames[index];
       fallbackRoot.appendChild(text);
