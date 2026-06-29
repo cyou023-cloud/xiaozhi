@@ -2031,7 +2031,6 @@ HonglouApp.characterGraph = (() => {
 
     window.addEventListener('resize', resize);
     HonglouApp.state.graphReady = true;
-    setTimeout(() => fitGraph(700), 1600);
   }
 
   function isMajorFemale(d) {
@@ -2155,7 +2154,6 @@ HonglouApp.characterGraph = (() => {
       return (y1 + y2) / 2;
     }).strength(0.7));
     simulation.alpha(0.56).restart();
-    setTimeout(() => fitGraph(650), 1300);
   }
 
   function setFamilyView() {
@@ -2173,7 +2171,6 @@ HonglouApp.characterGraph = (() => {
     simulation.force('y', null);
     simulation.force('center', d3.forceCenter(width / 2, height / 2));
     simulation.alpha(0.55).restart();
-    setTimeout(() => fitGraph(650), 1300);
   }
 
   function initFallbackGraph() {
