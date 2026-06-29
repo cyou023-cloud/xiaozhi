@@ -10,525 +10,1154 @@
 
 </script>
 <style>
-* { box-sizing: border-box; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root {
-  --paper: #f0e4cc;
-  --paper-warm: #e8d9b8;
-  --paper-dark: #dccaa0;
-  --ink: #2c1810;
-  --ink-dim: #5c4a3a;
-  --ink-faint: #8c7a6a;
-  --cinnabar: #c23a2b;
-  --cinnabar-bright: #e04a3a;
-  --cinnabar-dark: #8b1a1a;
-  --gold: #b8943e;
-  --gold-bright: #d4a84a;
+  --ink-deep: #1a1412;
+  --ink: #2c2418;
+  --ink-dim: #5a4e3c;
+  --ink-faint: #9a8e7a;
+  --paper: #f8f2ea;
+  --paper-warm: #f0e8dc;
+  --paper-dark: #e4dac8;
+  --cinnabar: #b83a2a;
+  --cinnabar-light: #d45a4a;
+  --cinnabar-deep: #8a2a1a;
+  --gold: #b08838;
+  --gold-light: #d4a84a;
   --jade: #5a8a6a;
-  --moss: #6a7a5a;
-  --border-ink: rgba(44,24,16,0.12);
-  --border-ink-strong: rgba(44,24,16,0.22);
-  --title-font: "STKaiti", "KaiTi SC", "KaiTi", "STSong", "Songti SC", "Noto Serif SC", serif;
-  --body-font: "PingFang SC", "STSong", "Songti SC", "Noto Serif SC", serif;
+  --jade-light: #7aaa8a;
+  --border-subtle: rgba(44,36,24,0.10);
+  --border-light: rgba(44,36,24,0.16);
+  --border-mid: rgba(44,36,24,0.25);
+  --title-font: "STKaiti","KaiTi SC","KaiTi","Noto Serif SC","Songti SC","STSong",serif;
+  --body-font: "Noto Serif SC","Songti SC","STSong","PingFang SC","Hiragino Sans GB",serif;
+  --mono-font: "JetBrains Mono","Menlo",monospace;
+  --shadow-card: 0 1px 3px rgba(26,20,18,0.06),0 1px 8px rgba(26,20,18,0.04);
+  --shadow-elevated: 0 2px 12px rgba(26,20,18,0.08),0 4px 24px rgba(26,20,18,0.04);
+  --shadow-hover: 0 4px 20px rgba(26,20,18,0.10),0 1px 4px rgba(26,20,18,0.06);
 }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  height: 100vh;
-  color: var(--ink);
-  font-family: var(--body-font);
-  background-color: #3a2a18;
+html{scroll-behavior:smooth}
+body{
+  margin:0;height:100vh;overflow:hidden;
+  color:var(--ink);font-family:var(--body-font);
+  background:#1a1612;
   background-image:
-    url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
-  overflow: hidden;
+    radial-gradient(ellipse at 20% 80%, rgba(90,138,106,0.04) 0%,transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(184,56,42,0.03) 0%,transparent 60%),
+    radial-gradient(ellipse at 50% 50%, rgba(176,136,56,0.02) 0%,transparent 70%);
 }
-body::before {
-  content: "";
-  position: fixed;
-  inset: 6px;
-  pointer-events: none;
-  z-index: 0;
-  border: 1px solid rgba(44,24,16,0.18);
-  border-radius: 4px;
-  box-shadow:
-    inset 0 0 120px rgba(0,0,0,0.25),
-    inset 0 0 40px rgba(0,0,0,0.12),
-    0 0 80px rgba(0,0,0,0.3);
-}
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.08;
+.hl-page{
+  position:relative;z-index:1;
+  width:100vw;height:100vh;
+  padding:12px 16px;
+  display:grid;
+  grid-template-rows:auto auto minmax(0,1fr);
+  gap:10px;
   background:
-    radial-gradient(circle at 2% 90%, #000 0px, transparent 3px),
-    radial-gradient(circle at 3% 88%, #000 0px, transparent 2px),
-    radial-gradient(circle at 98% 5%, #000 0px, transparent 4px),
-    radial-gradient(circle at 97% 8%, #000 0px, transparent 2px),
-    radial-gradient(circle at 95% 12%, #000 0px, transparent 3px),
-    radial-gradient(circle at 1% 15%, #000 0px, transparent 2px),
-    radial-gradient(circle at 5% 92%, #000 0px, transparent 3px),
-    radial-gradient(circle at 99% 1%, #000 0px, transparent 2px);
+    linear-gradient(172deg,
+      #f6eee4 0%,#f0e6d8 12%,#ece0ce 30%,
+      #f2e8dc 55%,#e8dac6 72%,#f4ece0 100%);
+  box-shadow:inset 0 0 0 1px rgba(248,242,234,0.3);
 }
-button, input { font: inherit; }
-button { cursor: pointer; }
-.hl-page {
-  position: relative;
-  z-index: 1;
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  padding: 10px 12px;
-  display: grid;
-  grid-template-rows: auto auto minmax(0,1fr);
-  gap: 8px;
-  background:
-    linear-gradient(175deg,
-      #f5ebd8 0%, #efe0c4 8%, #e8d5b0 30%,
-      #f0e0c8 55%, #e5ceaa 70%, #f2e5d0 100%);
-}
-.hl-header {
-  position: relative;
-  padding: 14px 20px;
-  border: 1.2px solid var(--border-ink-strong);
-  border-radius: 2px;
-  background: linear-gradient(180deg, rgba(240,228,204,0.6), rgba(232,217,184,0.45));
-  box-shadow: inset 0 0 60px rgba(139,26,26,0.04), 0 2px 12px rgba(0,0,0,0.08);
-}
-.hl-header::before {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  border: 0.5px solid rgba(44,24,16,0.08);
-  pointer-events: none;
-}
-.hl-header::after {
-  content: "";
-  position: absolute;
-  right: 18px;
-  top: 12px;
-  font-family: var(--title-font);
-  font-size: 36px;
-  color: var(--cinnabar);
-  opacity: 0.6;
-  transform: rotate(12deg);
-  pointer-events: none;
-  text-shadow: 0 0 3px rgba(194,58,43,0.3);
-}
-.hl-kicker {
-  display: inline-block;
-  font-family: var(--title-font);
-  font-size: 11px;
-  color: var(--ink-faint);
-  letter-spacing: 0.45em;
-  margin-bottom: 2px;
-}
-.hl-title {
-  margin: 0;
-  font-family: var(--title-font);
-  font-size: clamp(22px, 2.8vw, 40px);
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: var(--ink);
-  line-height: 1.15;
-}
-.hl-subtitle {
-  margin: 4px 0 0;
-  font-size: 12px;
-  color: var(--ink-dim);
-  letter-spacing: 0.06em;
-  max-width: 680px;
-}
-.hl-header-tools {
-  display: grid;
-  grid-template-columns: minmax(260px,500px) auto;
-  gap: 10px;
-  align-items: end;
-  margin-top: 10px;
-}
-.hl-search {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  border: 1px solid var(--border-ink-strong);
-  border-radius: 2px;
-  background: rgba(245,235,216,0.7);
-}
-.hl-search input {
-  flex: 1;
-  min-width: 0;
-  border: none;
-  outline: none;
-  padding: 9px 14px;
-  color: var(--ink);
-  background: transparent;
-  font-size: 13px;
-}
-.hl-search input::placeholder { color: var(--ink-faint); }
-.hl-primary-btn,
-.hl-ghost-btn,
-.hl-tab-button,
-.hl-chip-btn {
-  font-size: 13px;
-  transition: all .2s ease;
-}
-.hl-primary-btn {
-  padding: 9px 18px;
-  border: 1px solid var(--cinnabar);
-  border-radius: 2px;
-  color: #fff;
-  background: var(--cinnabar);
-  letter-spacing: 0.1em;
-}
-.hl-primary-btn:hover {
-  background: var(--cinnabar-bright);
-  border-color: var(--cinnabar-bright);
-}
-.hl-quick-hint {
-  color: var(--ink-faint);
-  font-size: 11px;
-  text-align: right;
-}
-.hl-tabs {
-  display: flex;
-  gap: 0;
-  padding: 0;
-  border-bottom: 1.5px solid var(--border-ink-strong);
-}
-.hl-tab-button {
-  flex: 1;
-  padding: 10px 20px;
-  border: none;
-  border-bottom: 2px solid transparent;
-  color: var(--ink-dim);
-  background: transparent;
-  font-family: var(--title-font);
-  font-size: 15px;
-  letter-spacing: 0.1em;
-  transition: all .2s ease;
-}
-.hl-tab-button:hover { color: var(--ink); }
-.hl-tab-button.is-active {
-  color: var(--cinnabar);
-  border-bottom-color: var(--cinnabar);
-  font-weight: 600;
-}
-.hl-panel {
-  display: none;
-  min-height: 0;
-  height: 100%;
-  border: 1px solid var(--border-ink-strong);
-  border-radius: 2px;
-  background: linear-gradient(180deg, rgba(240,225,200,0.5), rgba(235,215,185,0.35));
-  overflow: hidden;
-}
-.hl-panel.is-active { display: block; }
-.hl-character-layout {
-  display: grid;
-  grid-template-columns: minmax(0,1fr) 320px;
-  gap: 0;
-  height: 100%;
-  min-height: 0;
-}
-.hl-graph-stage {
-  position: relative;
-  height: 100%;
-  min-height: 0;
-  background: linear-gradient(180deg, rgba(242,230,210,0.5), rgba(236,220,195,0.4) 60%, rgba(228,210,185,0.5));
-}
-.hl-graph-toolbar,
-.hl-graph-legend,
-.hl-graph-stats,
-.hl-zoom-controls {
-  position: absolute;
-  z-index: 5;
-  border: 1px solid var(--border-ink-strong);
-  background: rgba(245,235,216,0.85);
-  border-radius: 2px;
-}
-.hl-graph-toolbar {
-  top: 10px;
-  left: 10px;
-  display: flex;
-  gap: 0;
-}
-.hl-ghost-btn {
-  padding: 7px 14px;
-  border: none;
-  border-right: 1px solid var(--border-ink);
-  color: var(--ink-dim);
-  background: transparent;
-}
-.hl-ghost-btn:last-child { border-right: none; }
-.hl-ghost-btn:hover { color: var(--ink); background: rgba(194,58,43,0.06); }
-.hl-ghost-btn.is-active { color: var(--cinnabar); font-weight: 600; }
-.hl-graph-legend {
-  left: 10px;
-  bottom: 10px;
-  max-width: 220px;
-  max-height: 240px;
-  overflow: auto;
-  padding: 12px;
-}
-.hl-legend-title,
-.hl-side-title,
-.hl-section-title {
-  font-family: var(--title-font);
-  color: var(--ink);
-  letter-spacing: 0.08em;
-}
-.hl-legend-title { margin: 0 0 6px; font-size: 13px; }
-.hl-legend-item { display: flex; align-items: center; gap: 6px; margin: 4px 0; color: var(--ink-dim); font-size: 11px; }
-.hl-legend-color { width: 8px; height: 8px; border: 1px solid var(--ink); border-radius: 50%; }
-.hl-graph-stats {
-  top: 10px;
-  right: 10px;
-  padding: 8px 12px;
-  color: var(--ink-dim);
-  font-size: 11px;
-  line-height: 1.7;
-}
-.hl-zoom-controls {
-  right: 10px;
-  bottom: 10px;
-  display: flex;
-  gap: 0;
-}
-.hl-zoom-controls button {
-  width: 34px;
-  height: 34px;
-  border: none;
-  border-right: 1px solid var(--border-ink);
-  color: var(--ink);
-  background: transparent;
-  font-size: 16px;
-}
-.hl-zoom-controls button:last-child { border-right: none; }
-.hl-zoom-controls button:hover { color: var(--cinnabar); }
-.hl-character-graph { width: 100%; height: 100%; }
-.hl-character-graph svg { width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
-.hl-character-graph svg.is-dragging { cursor: grabbing; }
-.hl-character-graph .link { stroke: rgba(44,24,16,0.18); stroke-width: 1; }
-.hl-character-graph .link-label { font-size: 8px; fill: rgba(44,24,16,0.24); pointer-events: none; font-family: var(--title-font); }
-.hl-character-graph .node { cursor: pointer; }
-.hl-character-graph .node circle { stroke: rgba(44,24,16,0.35); stroke-width: 1.5; fill-opacity: 0.9; }
-.hl-character-graph .node text {
-  pointer-events: none;
-  font-family: var(--title-font);
-  font-size: 11px;
-  fill: var(--ink);
-  paint-order: stroke;
-  stroke: rgba(245,235,216,0.9);
-  stroke-width: 2.5px;
-}
-.hl-character-graph .node.highlight circle { stroke: var(--cinnabar-bright); stroke-width: 3; filter: drop-shadow(0 0 4px rgba(194,58,43,0.5)); }
-.hl-character-graph .node.highlight text { fill: var(--cinnabar-dark); font-weight: 700; }
-.hl-character-graph .node.dim { opacity: 0.18; }
-.hl-character-graph .link.dim, .hl-character-graph .link-label.dim { opacity: 0.05; }
-.hl-detail-drawer {
-  border-left: 1px solid var(--border-ink-strong);
-  background: linear-gradient(180deg, rgba(250,243,228,0.7), rgba(242,230,210,0.5));
-  padding: 20px;
-  overflow: auto;
-}
-.hl-seal {
-  display: inline-grid;
-  place-items: center;
-  width: 50px;
-  height: 50px;
-  margin-bottom: 12px;
-  border: 2px solid var(--cinnabar);
-  border-radius: 50%;
-  color: var(--cinnabar);
-  font-family: var(--title-font);
-  font-size: 22px;
-  transform: rotate(8deg);
-}
-.hl-side-title { margin: 0 0 6px; font-size: 26px; }
-.hl-side-meta { color: var(--ink-dim); font-size: 12px; line-height: 1.7; }
-.hl-side-desc { margin: 12px 0; color: var(--ink); line-height: 1.9; font-size: 13px; border-left: 2px solid var(--cinnabar); padding-left: 10px; }
-.hl-link-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-.hl-chip-btn {
-  padding: 5px 10px;
-  border: 1px solid var(--border-ink-strong);
-  border-radius: 2px;
-  font-size: 11px;
-  color: var(--ink);
-  background: rgba(245,235,216,0.6);
-}
-.hl-chip-btn:hover { color: var(--cinnabar); border-color: var(--cinnabar); background: rgba(194,58,43,0.06); }
-.hl-residence-panel { padding: clamp(16px,2.5vw,28px); height: 100%; overflow: auto; }
-.hl-area-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
-.hl-section { margin: 24px 0 36px; }
-.hl-section-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
-.hl-section-title { margin: 0; font-size: 22px; }
-.hl-section-desc { margin: 4px 0 0; color: var(--ink-dim); font-size: 12px; line-height: 1.6; }
-.hl-residence-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 14px;
-}
-.hl-residence-card {
-  position: relative;
-  overflow: hidden;
-  min-height: 200px;
-  padding: 18px;
-  border: 1px solid var(--border-ink-strong);
-  border-radius: 2px;
-  background: linear-gradient(135deg, rgba(245,235,216,0.7), rgba(240,225,205,0.5));
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  transition: transform .2s ease, box-shadow .2s ease;
-}
-.hl-residence-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 4px;
-  background: var(--residence-accent, var(--cinnabar));
-}
-.hl-residence-card::after {
-  content: "";
-  position: absolute;
-  right: -30px;
-  top: -30px;
-  width: 100px;
-  height: 100px;
-  border: 1px solid color-mix(in srgb, var(--residence-accent, var(--cinnabar)) 40%, transparent);
-  border-radius: 50%;
-  opacity: .2;
-}
-.hl-residence-card:hover,
-.hl-residence-card.is-highlighted {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-  border-color: var(--cinnabar);
-}
-.hl-residence-card.is-highlighted { animation: hlPulse 1.2s ease 2; }
-@keyframes hlPulse { 50% { box-shadow: 0 0 0 4px rgba(194,58,43,0.08), 0 6px 20px rgba(0,0,0,0.1); } }
-.hl-residence-name {
-  position: relative; z-index: 1;
-  margin: 0;
-  font-family: var(--title-font);
-  font-size: 20px;
-  color: var(--ink);
-  letter-spacing: 0.08em;
-}
-.hl-residence-loc { position: relative; z-index: 1; margin: 5px 0 10px; color: var(--ink-dim); font-size: 11px; }
-.hl-residence-desc { position: relative; z-index: 1; margin: 0 0 14px; color: var(--ink-dim); line-height: 1.8; font-size: 12px; }
-.hl-occupants { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 5px; }
-.hl-occupant-tag {
-  border: 1px solid var(--border-ink-strong);
-  border-radius: 2px;
-  padding: 4px 8px;
-  color: var(--ink-dim);
-  background: rgba(245,235,216,0.5);
-  font-size: 11px;
-}
-button.hl-occupant-tag:hover { color: var(--cinnabar); border-color: var(--cinnabar); }
-.hl-occupant-tag.master { color: var(--cinnabar-dark); border-color: rgba(194,58,43,0.3); background: rgba(194,58,43,0.05); }
-.hl-occupant-tag.maid { color: #6a5a8a; border-color: rgba(106,90,138,0.25); background: rgba(106,90,138,0.05); }
-.hl-overview { padding: clamp(16px,2.5vw,28px); height: 100%; overflow: auto; }
-.hl-overview-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 12px;
-  margin-top: 16px;
-}
-.hl-overview-item {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 8px;
-  align-items: center;
-  padding: 12px;
-  border: 1px solid var(--border-ink);
-  border-radius: 2px;
-  background: rgba(245,235,216,0.45);
-}
-.hl-overview-item button {
-  min-width: 0;
-  border: none;
-  color: var(--ink);
-  background: transparent;
-  text-align: left;
-  font-family: var(--title-font);
-  font-size: 13px;
-}
-.hl-overview-item button:hover { color: var(--cinnabar); }
-.hl-overview-arrow { color: var(--cinnabar); font-size: 18px; }
-.hl-tooltip {
-  position: fixed;
-  z-index: 1000;
-  display: none;
-  max-width: 260px;
-  padding: 10px 12px;
-  border: 1px solid var(--border-ink-strong);
-  border-radius: 2px;
-  color: var(--ink);
-  background: rgba(250,243,228,0.95);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  pointer-events: none;
-}
-.hl-tip-name { font-family: var(--title-font); font-size: 16px; color: var(--cinnabar-dark); }
-.hl-tip-group { margin-top: 2px; color: var(--ink-dim); font-size: 11px; }
-.hl-tip-desc { margin-top: 5px; color: var(--ink-dim); font-size: 11px; line-height: 1.6; }
-.hl-tip-relations { margin-top: 6px; padding-top: 5px; border-top: 1px solid var(--border-ink); color: var(--cinnabar); font-size: 11px; }
-.hl-toast {
-  position: fixed;
-  left: 50%;
-  bottom: 24px;
-  z-index: 1200;
-  transform: translate(-50%, 16px);
-  opacity: 0;
-  padding: 8px 14px;
-  border: 1px solid var(--border-ink-strong);
-  border-radius: 2px;
-  color: var(--ink);
-  background: rgba(250,243,228,0.95);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  transition: opacity .2s, transform .2s;
-  pointer-events: none;
-  font-size: 12px;
-}
-.hl-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
-@media (max-width: 1050px) {
-  .hl-character-layout { grid-template-columns: 1fr; grid-template-rows: minmax(0,1fr) auto; }
-  .hl-detail-drawer { border-left: none; border-top: 1px solid var(--border-ink-strong); max-height: 190px; }
-}
-@media (max-width: 760px) {
-  .hl-page { padding: 6px 8px; gap: 6px; }
-  .hl-header { padding: 10px 12px; }
-  .hl-header::after { right: 10px; top: 8px; font-size: 28px; }
-  .hl-title { font-size: clamp(18px, 5vw, 26px); }
-  .hl-subtitle { display: none; }
-  .hl-header-tools { grid-template-columns: 1fr; gap: 6px; }
-  .hl-search input { font-size: 12px; }
-  .hl-quick-hint { display: none; }
-  .hl-tab-button { font-size: 13px; padding: 8px 12px; }
-  .hl-graph-toolbar { left: 6px; right: 6px; }
-  .hl-graph-stats { display: none; }
-  .hl-graph-legend { max-width: calc(100% - 12px); left: 6px; bottom: 6px; max-height: 120px; }
-  .hl-zoom-controls { right: 6px; bottom: 142px; }
-  .hl-residence-grid, .hl-overview-grid { grid-template-columns: 1fr; }
-}
-@media (max-width: 480px) {
-  .hl-search { flex-direction: column; }
-  .hl-primary-btn { width: 100%; }
-  .hl-detail-drawer, .hl-residence-panel, .hl-overview { padding: 14px; }
+/* === Page Frame (Chinese border detail) === */
+.hl-page::before{
+  content:"";position:absolute;inset:4px;
+  border:1px solid var(--border-mid);
+  pointer-events:none;z-index:0;
 }
 
+/* === Corner decorations === */
+.hl-corner{position:absolute;width:18px;height:18px;z-index:2;pointer-events:none;opacity:0.5}
+.hl-corner-tl{top:7px;left:7px;border-top:1.5px solid var(--cinnabar);border-left:1.5px solid var(--cinnabar)}
+.hl-corner-tr{top:7px;right:7px;border-top:1.5px solid var(--cinnabar);border-right:1.5px solid var(--cinnabar)}
+.hl-corner-bl{bottom:7px;left:7px;border-bottom:1.5px solid var(--cinnabar);border-left:1.5px solid var(--cinnabar)}
+.hl-corner-br{bottom:7px;right:7px;border-bottom:1.5px solid var(--cinnabar);border-right:1.5px solid var(--cinnabar)}
+/* === Header === */
+.hl-header{
+  position:relative;
+  padding:16px 24px 14px;
+  background:linear-gradient(178deg,rgba(248,242,234,0.7),rgba(240,230,216,0.5));
+  border:1px solid var(--border-mid);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.6),var(--shadow-card);
+}
+.hl-header::after{
+  content:"";position:absolute;bottom:0;left:24px;right:24px;height:1px;
+  background:linear-gradient(90deg,transparent 0%,var(--cinnabar) 15%,var(--cinnabar) 85%,transparent 100%);
+  opacity:0.35;
+}
+.hl-kicker{
+  display:inline-block;
+  font-family:var(--title-font);font-size:11px;color:var(--ink-faint);
+  letter-spacing:0.6em;margin-bottom:2px;
+  text-transform:uppercase;
+}
+.hl-title{
+  margin:0;
+  font-family:var(--title-font);
+  font-size:clamp(20px,2.6vw,36px);
+  font-weight:600;
+  letter-spacing:0.16em;
+  color:var(--ink-deep);
+  line-height:1.2;
+  background:linear-gradient(135deg,var(--ink-deep) 0%,var(--ink) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.hl-subtitle{
+  margin:3px 0 0;font-size:12px;color:var(--ink-dim);
+  letter-spacing:0.08em;max-width:680px;line-height:1.6;
+}
+.hl-header-tools{
+  display:grid;
+  grid-template-columns:minmax(260px,480px) auto;
+  gap:12px;align-items:end;margin-top:10px;
+}
+.hl-search{
+  display:flex;align-items:center;gap:0;
+  border:1px solid var(--border-light);
+  background:rgba(248,242,234,0.75);
+  backdrop-filter:blur(4px);
+  transition:border-color .25s,box-shadow .25s;
+}
+.hl-search:focus-within{border-color:var(--cinnabar);box-shadow:0 0 0 2px rgba(184,56,42,0.08)}
+.hl-search input{
+  flex:1;min-width:0;border:none;outline:none;
+  padding:10px 16px;color:var(--ink);background:transparent;font-size:13px;
+}
+.hl-search input::placeholder{color:var(--ink-faint)}
+.hl-search-btn{
+  border:none;background:transparent;
+  padding:8px 14px;color:var(--ink-faint);cursor:pointer;
+  transition:color .2s;
+}
+.hl-search-btn:hover{color:var(--cinnabar)}
+.hl-search-btn svg{display:block;width:16px;height:16px}
+.hl-quick-hint{
+  color:var(--ink-faint);font-size:10.5px;text-align:right;
+  letter-spacing:0.04em;
+}
+/* === Buttons === */
+button,input{font:inherit}
+button{cursor:pointer}
+.hl-primary-btn,.hl-ghost-btn,.hl-tab-button,.hl-chip-btn{
+  transition:all .2s ease;font-size:13px;
+  font-family:var(--title-font);
+}
+.hl-primary-btn{
+  padding:10px 20px;
+  border:1px solid var(--cinnabar);
+  color:#fff;
+  background:linear-gradient(135deg,var(--cinnabar),var(--cinnabar-deep));
+  letter-spacing:0.12em;
+  position:relative;overflow:hidden;
+}
+.hl-primary-btn::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,0.12) 50%,transparent 60%);
+  opacity:0;transition:opacity .3s;
+}
+.hl-primary-btn:hover::after{opacity:1}
+.hl-primary-btn:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(184,56,42,0.25)}
+.hl-primary-btn:active{transform:translateY(0)}
+.hl-ghost-btn{
+  border:none;background:transparent;
+  color:var(--ink-dim);padding:7px 14px;
+  border-right:1px solid var(--border-light);
+  font-family:var(--body-font);font-size:12px;
+}
+.hl-ghost-btn:last-child{border-right:none}
+.hl-ghost-btn:hover{color:var(--ink-deep);background:rgba(184,56,42,0.04)}
+.hl-ghost-btn.is-active{color:var(--cinnabar);font-weight:600}
+.hl-chip-btn{
+  padding:5px 11px;
+  border:1px solid var(--border-light);
+  font-size:11px;color:var(--ink-dim);
+  background:rgba(248,242,234,0.5);
+  letter-spacing:0.04em;
+}
+.hl-chip-btn:hover{color:var(--cinnabar);border-color:var(--cinnabar);background:rgba(184,56,42,0.05)}
+/* === Tabs === */
+.hl-tabs{
+  display:flex;gap:0;padding:0;
+  border-bottom:1px solid var(--border-subtle);
+  position:relative;
+}
+.hl-tab-button{
+  flex:1;padding:10px 20px;
+  border:none;
+  color:var(--ink-faint);
+  background:transparent;
+  font-family:var(--title-font);font-size:15px;
+  letter-spacing:0.10em;
+  position:relative;overflow:visible;
+}
+.hl-tab-button::after{
+  content:"";position:absolute;bottom:-1px;left:20%;right:20%;
+  height:2px;
+  background:var(--cinnabar);
+  transform:scaleX(0);opacity:0;
+  transition:transform .3s ease,opacity .25s;
+}
+.hl-tab-button:hover{color:var(--ink-dim)}
+.hl-tab-button.is-active{color:var(--cinnabar);font-weight:600}
+.hl-tab-button.is-active::after{transform:scaleX(1);opacity:1}
+/* === Panels === */
+.hl-panel{
+  display:none;min-height:0;height:100%;
+  border:1px solid var(--border-light);
+  background:linear-gradient(180deg,rgba(248,242,234,0.5),rgba(240,230,216,0.3));
+  overflow:hidden;
+}
+.hl-panel.is-active{display:block}
+/* === Character Layout === */
+.hl-character-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 300px;
+  gap:0;height:100%;min-height:0;
+}
+.hl-graph-stage{
+  position:relative;height:100%;min-height:0;
+  background:
+    radial-gradient(ellipse at 30% 40%,rgba(90,138,106,0.03) 0%,transparent 50%),
+    radial-gradient(ellipse at 70% 60%,rgba(184,56,42,0.02) 0%,transparent 50%),
+    linear-gradient(175deg,rgba(245,238,228,0.6),rgba(238,228,214,0.4) 60%,rgba(228,218,202,0.5));
+}
+/* === Graph Toolbar === */
+.hl-graph-toolbar{
+  position:absolute;top:10px;left:10px;z-index:5;
+  display:flex;gap:0;
+  border:1px solid var(--border-light);
+  background:rgba(248,242,234,0.88);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+}
+/* === Graph Legend === */
+.hl-graph-legend{
+  position:absolute;left:10px;bottom:10px;z-index:5;
+  max-width:200px;max-height:210px;overflow:auto;
+  padding:12px 14px;
+  border:1px solid var(--border-light);
+  background:rgba(248,242,234,0.88);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+}
+.hl-legend-title{
+  margin:0 0 8px;
+  font-family:var(--title-font);font-size:12px;
+  color:var(--ink);letter-spacing:0.1em;
+}
+.hl-legend-item{
+  display:flex;align-items:center;gap:7px;
+  margin:3px 0;color:var(--ink-dim);font-size:10.5px;
+  line-height:1.5;
+}
+.hl-legend-item span{flex:1}
+.hl-legend-color{
+  display:inline-block;width:10px;height:10px;
+  min-width:10px;min-height:10px;
+  border-radius:50%;flex-shrink:0;flex:none;
+  line-height:1;font-size:0;
+  box-shadow:0 1px 3px rgba(44,36,24,0.15);
+}
+/* === Graph Stats === */
+.hl-graph-stats{
+  position:absolute;top:10px;right:10px;z-index:5;
+  padding:8px 12px;
+  font-size:10.5px;color:var(--ink-faint);
+  line-height:1.8;
+  border:1px solid var(--border-subtle);
+  background:rgba(248,242,234,0.75);
+  backdrop-filter:blur(4px);
+}
+/* === Zoom Controls === */
+.hl-zoom-controls{
+  position:absolute;right:10px;bottom:10px;z-index:5;
+  display:flex;gap:0;
+  border:1px solid var(--border-light);
+  background:rgba(248,242,234,0.88);
+  backdrop-filter:blur(6px);
+}
+.hl-zoom-controls button{
+  width:34px;height:34px;
+  border:none;border-right:1px solid var(--border-subtle);
+  color:var(--ink-dim);background:transparent;
+  font-size:15px;transition:color .2s,background .2s;
+  display:grid;place-items:center;
+}
+.hl-zoom-controls button:last-child{border-right:none}
+.hl-zoom-controls button:hover{color:var(--cinnabar);background:rgba(184,56,42,0.04)}
+/* === Graph SVG === */
+.hl-character-graph{width:100%;height:100%}
+.hl-character-graph svg{width:100%;height:100%;display:block;cursor:grab;touch-action:none}
+.hl-character-graph svg.is-dragging{cursor:grabbing}
+.hl-character-graph .link{
+  stroke:rgba(44,36,24,0.18);
+  stroke-width:1.2;
+  transition:opacity .3s,stroke .3s;
+}
+.hl-character-graph .link-label{
+  font-size:8.5px;
+  fill:rgba(44,36,24,0.65);
+  pointer-events:none;
+  font-family:var(--body-font);
+  paint-order:stroke;
+  stroke:rgba(248,242,234,0.85);
+  stroke-width:3px;
+  text-anchor:middle;
+  transition:opacity .3s;
+}
+.hl-character-graph .node{cursor:pointer}
+.hl-character-graph .node circle{
+  stroke:rgba(44,36,24,0.25);
+  stroke-width:1.5;
+  fill-opacity:0.92;
+  transition:stroke .3s,stroke-width .2s;
+}
+.hl-character-graph .node text{
+  pointer-events:none;
+  font-family:var(--title-font);
+  font-size:10.5px;
+  fill:var(--ink);
+  paint-order:stroke;
+  stroke:rgba(248,242,234,0.8);
+  stroke-width:2.5px;
+}
+.hl-character-graph .node.highlight circle{
+  stroke:var(--cinnabar-light);stroke-width:3;
+  filter:drop-shadow(0 0 6px rgba(184,56,42,0.35));
+}
+.hl-character-graph .node.highlight text{
+  fill:var(--cinnabar-deep);font-weight:700;
+}
+.hl-character-graph .node.dim{opacity:0.15}
+.hl-character-graph .link.dim,
+.hl-character-graph .link-label.dim{opacity:0.04}
+.hl-character-graph .node.is-main circle{
+  stroke:var(--cinnabar);stroke-width:2.5;
+  filter:drop-shadow(0 0 8px rgba(184,56,42,0.2));
+}
+/* === Detail Drawer === */
+.hl-detail-drawer{
+  border-left:1px solid var(--border-light);
+  background:
+    linear-gradient(180deg,rgba(250,246,238,0.75),rgba(242,234,222,0.5));
+  padding:20px 22px;
+  overflow:auto;
+}
+.hl-seal{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;margin-bottom:10px;
+  border:1.5px solid var(--cinnabar);
+  border-radius:4px;
+  color:var(--cinnabar);
+  font-family:var(--title-font);
+  font-size:18px;
+  background:rgba(184,56,42,0.04);
+}
+.hl-side-title{
+  margin:0 0 6px;
+  font-family:var(--title-font);font-size:24px;
+  color:var(--ink-deep);letter-spacing:0.08em;
+  line-height:1.25;
+}
+.hl-side-meta{
+  color:var(--ink-faint);font-size:11px;
+  line-height:1.8;letter-spacing:0.04em;
+}
+.hl-side-desc{
+  margin:12px 0;
+  color:var(--ink-dim);
+  line-height:2;
+  font-size:12.5px;
+  border-left:2px solid var(--cinnabar);
+  padding-left:14px;
+  background:linear-gradient(90deg,rgba(184,56,42,0.03),transparent);
+}
+.hl-link-list{
+  display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;
+}
+/* === Residence Panel === */
+.hl-residence-panel{
+  padding:clamp(16px,2.5vw,28px);
+  height:100%;overflow:auto;
+}
+.hl-area-nav{
+  display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--border-subtle);
+}
+.hl-section{margin:20px 0 32px}
+.hl-section-head{
+  display:flex;align-items:end;justify-content:space-between;
+  gap:16px;margin-bottom:14px;
+}
+.hl-section-title{
+  margin:0;
+  font-family:var(--title-font);font-size:20px;
+  color:var(--ink);letter-spacing:0.10em;
+  position:relative;display:inline-block;
+}
+.hl-section-title::after{
+  content:"";position:absolute;bottom:-3px;left:0;
+  width:32px;height:1.5px;
+  background:var(--cinnabar);
+  opacity:0.5;
+}
+.hl-section-desc{
+  margin:4px 0 0;color:var(--ink-faint);
+  font-size:11.5px;line-height:1.6;
+}
+.hl-residence-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:14px;
+}
+/* === Residence Card === */
+.hl-residence-card{
+  position:relative;overflow:hidden;
+  min-height:180px;padding:18px 20px;
+  border:1px solid var(--border-light);
+  background:linear-gradient(162deg,rgba(248,242,234,0.85),rgba(240,230,216,0.6));
+  box-shadow:var(--shadow-card);
+  transition:transform .25s ease,box-shadow .3s ease,border-color .25s;
+}
+.hl-residence-card::before{
+  content:"";position:absolute;inset:0 auto 0 0;
+  width:3px;
+  background:var(--residence-accent,var(--cinnabar));
+  opacity:0.7;
+}
+.hl-residence-card::after{
+  content:"";position:absolute;
+  right:-20px;top:-20px;
+  width:80px;height:80px;
+  border:1px solid color-mix(in srgb,var(--residence-accent,var(--cinnabar)) 25%,transparent);
+  border-radius:50%;
+  opacity:0.3;
+}
+.hl-residence-card:hover,
+.hl-residence-card.is-highlighted{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow-hover);
+  border-color:var(--residence-accent,var(--cinnabar));
+}
+.hl-residence-card.is-highlighted{
+  animation:hlCardPulse 1s ease 2;
+}
+@keyframes hlCardPulse{
+  50%{box-shadow:0 0 0 4px rgba(184,56,42,0.06),var(--shadow-hover)}
+}
+.hl-residence-name{
+  position:relative;z-index:1;
+  margin:0;
+  font-family:var(--title-font);font-size:18px;
+  color:var(--ink-deep);letter-spacing:0.10em;
+}
+.hl-residence-loc{
+  position:relative;z-index:1;
+  margin:4px 0 8px;
+  color:var(--ink-faint);font-size:10.5px;
+  letter-spacing:0.04em;
+}
+.hl-residence-desc{
+  position:relative;z-index:1;
+  margin:0 0 12px;
+  color:var(--ink-dim);
+  line-height:1.8;font-size:11.5px;
+}
+.hl-occupants{
+  position:relative;z-index:1;
+  display:flex;flex-wrap:wrap;gap:5px;
+}
+.hl-occupant-tag{
+  border:1px solid var(--border-light);
+  padding:3px 9px;
+  color:var(--ink-dim);
+  background:rgba(248,242,234,0.5);
+  font-size:10.5px;
+  line-height:1.5;
+  transition:all .2s;
+}
+button.hl-occupant-tag:hover{
+  color:var(--cinnabar);border-color:var(--cinnabar);
+  background:rgba(184,56,42,0.04);
+}
+.hl-occupant-tag.master{
+  color:var(--cinnabar-deep);
+  border-color:rgba(184,56,42,0.25);
+  background:rgba(184,56,42,0.04);
+}
+.hl-occupant-tag.maid{
+  color:#6a5a7a;
+  border-color:rgba(106,90,122,0.2);
+  background:rgba(106,90,122,0.04);
+}
+/* === Overview === */
+.hl-overview{
+  padding:clamp(16px,2.5vw,28px);
+  height:100%;overflow:auto;
+}
+.hl-overview-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:10px;margin-top:16px;
+}
+.hl-overview-item{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:8px;align-items:center;
+  padding:12px 14px;
+  border:1px solid var(--border-light);
+  background:rgba(248,242,234,0.5);
+  transition:border-color .2s,background .2s;
+}
+.hl-overview-item:hover{border-color:var(--border-mid);background:rgba(248,242,234,0.7)}
+.hl-overview-item button{
+  min-width:0;border:none;
+  color:var(--ink);background:transparent;
+  text-align:left;
+  font-family:var(--title-font);font-size:12px;
+  transition:color .2s;
+}
+.hl-overview-item button:hover{color:var(--cinnabar)}
+.hl-overview-arrow{
+  color:var(--cinnabar);font-size:14px;
+  text-align:center;letter-spacing:0.2em;
+}
+/* === Tooltip === */
+.hl-tooltip{
+  position:fixed;z-index:1000;
+  display:none;max-width:240px;
+  padding:10px 14px;
+  border:1px solid var(--border-light);
+  background:rgba(250,246,238,0.97);
+  box-shadow:var(--shadow-elevated);
+  pointer-events:none;
+  backdrop-filter:blur(8px);
+}
+.hl-tip-name{
+  font-family:var(--title-font);
+  font-size:15px;color:var(--cinnabar-deep);
+}
+.hl-tip-group{
+  margin-top:2px;
+  color:var(--ink-faint);font-size:10.5px;
+}
+.hl-tip-desc{
+  margin-top:5px;
+  color:var(--ink-dim);font-size:10.5px;
+  line-height:1.7;
+}
+.hl-tip-relations{
+  margin-top:6px;padding-top:5px;
+  border-top:1px solid var(--border-subtle);
+  color:var(--cinnabar);font-size:10.5px;
+}
+/* === Toast === */
+.hl-toast{
+  position:fixed;left:50%;bottom:24px;z-index:1200;
+  transform:translate(-50%,16px);opacity:0;
+  padding:10px 20px;
+  border:1px solid var(--border-light);
+  background:rgba(250,246,238,0.95);
+  box-shadow:var(--shadow-elevated);
+  pointer-events:none;font-size:12px;
+  transition:opacity .25s,transform .25s;
+  backdrop-filter:blur(8px);
+}
+.hl-toast.is-visible{opacity:1;transform:translate(-50%,0)}
+/* === Responsive === */
+@media(max-width:1050px){
+  .hl-character-layout{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto}
+  .hl-detail-drawer{
+    border-left:none;border-top:1px solid var(--border-light);
+    max-height:180px;
+  }
+}
+@media(max-width:760px){
+  .hl-page{padding:6px 8px;gap:6px}
+  .hl-header{padding:12px 14px}
+  .hl-title{font-size:clamp(18px,4.5vw,24px)}
+  .hl-subtitle{display:none}
+  .hl-header-tools{grid-template-columns:1fr;gap:6px}
+  .hl-search input{font-size:12px;padding:8px 12px}
+  .hl-quick-hint{display:none}
+  .hl-corner{display:none}
+  .hl-tab-button{font-size:13px;padding:8px 12px}
+  .hl-graph-toolbar{left:6px;right:6px}
+  .hl-graph-stats{display:none}
+  .hl-graph-legend{max-width:calc(100% - 12px);left:6px;bottom:6px;max-height:100px}
+  .hl-zoom-controls{right:6px;bottom:116px}
+  .hl-residence-grid,.hl-overview-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .hl-search{flex-direction:column}
+  .hl-primary-btn{width:100%}
+  .hl-detail-drawer,.hl-residence-panel,.hl-overview{padding:12px}
+}
+
+/* ========================================
+   中国风装饰系统 · 水墨 · 朱砂 · 花窗 · 卷轴
+   ======================================== */
+
+/* --- 1. 页面背景 (Page Background) --- */
+.hl-page {
+  background-image:
+    repeating-linear-gradient(172deg, #f6eee4 0%, #f0e6d8 12%, #ece0ce 30%, #f2e8dc 55%, #e8dac6 72%, #f4ece0 100%);
+}
+
+
+/* --- 3. 墨底 · 雪景渐变 (Ink-wash dark mode for body bg) --- */
+body {
+  background-image:
+    radial-gradient(ellipse at 30% 20%, rgba(90,138,106,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(184,56,42,0.025) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(176,136,56,0.015) 0%, transparent 60%);
+}
+
+/* --- 4. 朱砂边框 (Cinnabar Page Frame) ---
+   Double-line border suggesting traditional architecture */
+.hl-page::before {
+  border: 1px solid var(--border-mid);
+  box-shadow: inset 0 0 0 1px rgba(184,56,42,0.08), 0 0 0 1px rgba(184,56,42,0.04);
+}
+
+/* --- 5. 水墨山水 (Ink Wash Mountains) ---
+   CSS gradient mountain silhouettes in the graph stage */
+.hl-graph-stage::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 80px;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    /* Far mountain */
+    radial-gradient(ellipse 180px 60px at 10% 100%, rgba(44,36,24,0.04) 0%, transparent 100%),
+    radial-gradient(ellipse 200px 55px at 25% 100%, rgba(44,36,24,0.035) 0%, transparent 100%),
+    /* Middle mountain */
+    radial-gradient(ellipse 150px 50px at 45% 100%, rgba(44,36,24,0.04) 0%, transparent 100%),
+    radial-gradient(ellipse 190px 55px at 60% 100%, rgba(44,36,24,0.03) 0%, transparent 100%),
+    /* Near mountain */
+    radial-gradient(ellipse 170px 60px at 75% 100%, rgba(44,36,24,0.035) 0%, transparent 100%),
+    radial-gradient(ellipse 140px 45px at 90% 100%, rgba(44,36,24,0.04) 0%, transparent 100%);
+}
+
+/* --- 6. 水墨远山 (Far Mountain - Stage Top Right) --- */
+.hl-graph-stage::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 140px;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 160px 80px at 100% 0%, rgba(90,138,106,0.025) 0%, transparent 100%),
+    radial-gradient(ellipse 120px 70px at 70% 0%, rgba(44,36,24,0.02) 0%, transparent 100%);
+}
+
+/* --- 7. 卷轴标签 (Scroll-style Tabs) --- */
+.hl-tabs {
+  position: relative;
+}
+.hl-tabs::before {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 5%, var(--border-subtle) 20%, var(--border-subtle) 80%, transparent 95%);
+}
+.hl-tab-button {
+  position: relative;
+  transition: color .25s, background .25s;
+}
+.hl-tab-button::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: var(--cinnabar);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity .3s, transform .3s;
+}
+.hl-tab-button.is-active::before {
+  opacity: 0.3;
+  transform: translateY(0);
+}
+.hl-tab-button:hover::before {
+  opacity: 0.15;
+  transform: translateY(0);
+}
+
+/* --- 8. 朱砂印章 (Cinnabar Seal Stamp) --- */
+.hl-seal {
+  position: relative;
+  overflow: hidden;
+}
+.hl-seal::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 0.5px solid var(--cinnabar);
+  border-radius: 2px;
+  opacity: 0.4;
+}
+.hl-seal::after {
+  content: "梦";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--title-font);
+  font-size: 12px;
+  color: var(--cinnabar);
+  opacity: 0.08;
+  transform: rotate(-8deg);
+}
+
+/* --- 9. 梅花疏影 (Plum Blossom Shadow) ---
+   Subtle plum blossom branch in the residence panel corner */
+.hl-residence-panel::before {
+  content: "";
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 180px;
+  height: 240px;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    /* Branch */
+    radial-gradient(ellipse 80px 2px at 60% 95%, rgba(44,36,24,0.06) 0%, transparent 100%),
+    radial-gradient(ellipse 2px 50px at 55% 75%, rgba(44,36,24,0.04) 0%, transparent 100%),
+    /* Blossoms */
+    radial-gradient(circle 6px at 50% 70%, rgba(184,56,42,0.04) 0%, transparent 100%),
+    radial-gradient(circle 5px at 30% 60%, rgba(184,56,42,0.035) 0%, transparent 100%),
+    radial-gradient(circle 7px at 65% 50%, rgba(184,56,42,0.03) 0%, transparent 100%),
+    radial-gradient(circle 4px at 45% 40%, rgba(184,56,42,0.04) 0%, transparent 100%),
+    radial-gradient(circle 5px at 25% 30%, rgba(184,56,42,0.025) 0%, transparent 100%);
+}
+
+/* --- 10. 花窗卡片 (Window Lattice Cards) --- */
+.hl-residence-card {
+  position: relative;
+}
+.hl-residence-card .hl-lattice-corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.25;
+}
+.hl-lattice-tl { top: 6px; left: 6px; }
+.hl-lattice-tr { top: 6px; right: 6px; }
+.hl-lattice-bl { bottom: 6px; left: 6px; }
+.hl-lattice-br { bottom: 6px; right: 6px; }
+
+/* --- 11. 朱砂红线 (Cinnabar Red Thread) ---
+   Decorative line on overview items */
+.hl-overview-arrow {
+  position: relative;
+}
+.hl-overview-arrow::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  height: 2px;
+  margin: -1px;
+  border-radius: 50%;
+  background: var(--cinnabar);
+  opacity: 0.3;
+}
+
+/* --- 12. 墨韵玻璃 (Ink Rhythm Backdrop) ---
+   Frosted glass effect for floating panels */
+.hl-graph-toolbar,
+.hl-graph-legend,
+.hl-zoom-controls,
+.hl-graph-stats {
+  backdrop-filter: blur(8px) saturate(1.2);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2);
+}
+
+/* --- 13. 书签式标签激活态 (Bookmark Tab Active) --- */
+.hl-tab-button.is-active {
+  background: linear-gradient(180deg, rgba(184,56,42,0.04) 0%, transparent 100%);
+}
+
+/* --- 14. 翠竹 · 墨影 (Bamboo Shadow Decoration) ---
+   Subtle bamboo stalk in the character panel */
+.hl-character-panel .hl-graph-stage {
+  position: relative;
+}
+.hl-character-panel .hl-graph-stage .hl-bamboo {
+  position: absolute;
+  left: 12px;
+  top: 60px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.06;
+}
+.hl-bamboo-stalk {
+  display: block;
+  width: 3px;
+  height: 100px;
+  background: linear-gradient(to top, transparent 0%, var(--jade) 20%, var(--jade) 70%, transparent 100%);
+  border-radius: 2px;
+  margin-bottom: 2px;
+}
+.hl-bamboo-node {
+  display: block;
+  width: 6px; height: 2px;
+  background: var(--jade);
+  margin: -1px auto;
+  border-radius: 1px;
+}
+.hl-bamboo-leaf {
+  display: block;
+  position: absolute;
+  width: 16px; height: 4px;
+  background: var(--jade);
+  border-radius: 50%/100% 100% 0 0;
+  transform-origin: left center;
+}
+.hl-bamboo-leaf-1 { top: 20px; left: -8px; transform: rotate(-30deg); }
+.hl-bamboo-leaf-2 { top: 30px; left: -6px; transform: rotate(-50deg); }
+.hl-bamboo-leaf-3 { top: 50px; left: -5px; transform: rotate(-20deg); }
+.hl-bamboo-leaf-4 { top: 70px; left: -7px; transform: rotate(-40deg); }
+
+/* --- 15. 灯笼搜索 (Lantern Search Button) --- */
+.hl-search-btn {
+  position: relative;
+  overflow: visible;
+}
+.hl-search-btn::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  width: 1px;
+  height: 6px;
+  margin-left: -0.5px;
+  background: var(--cinnabar);
+  opacity: 0;
+  transition: opacity .3s;
+}
+.hl-search-btn:hover::after {
+  opacity: 0.4;
+}
+
+/* --- 16. 墨滴微动 (Ink Drop Micro Animation) --- */
+@keyframes inkDrop {
+  0% { transform: scaleY(0); opacity: 0; }
+  30% { opacity: 0.3; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+.hl-seal::before {
+  animation: inkDrop 3s ease-in-out infinite;
+}
+
+/* --- 17. 卷轴展开动画 (Scroll Unfurl Animation) --- */
+@keyframes scrollUnfurl {
+  from { transform: scaleY(0); opacity: 0; }
+  to { transform: scaleY(1); opacity: 1; }
+}
+.hl-detail-drawer .hl-seal {
+  animation: scrollUnfurl 0.6s ease-out;
+}
+
+/* --- 18. 墨色涟漪 (Ink Ripple on Click) --- */
+@keyframes inkRipple {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* ===== Timeline Tab Styles ===== */
+.hl-timeline-panel {
+  padding: clamp(16px, 2.5vw, 28px);
+  height: 100%; overflow: auto;
+}
+.hl-timeline-title {
+  font-family: var(--title-font);
+  font-size: clamp(20px, 2.2vw, 30px);
+  color: var(--ink-deep);
+  letter-spacing: 0.10em;
+  margin-bottom: 6px;
+}
+.hl-timeline-sub {
+  color: var(--ink-faint);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  margin-bottom: 28px;
+}
+.hl-timeline {
+  position: relative;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 8px 0 40px;
+}
+.hl-timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 1.5px;
+  background: linear-gradient(180deg, transparent 0%, var(--ink-faint) 5%, var(--ink-faint) 95%, transparent 100%);
+  transform: translateX(-50%);
+}
+.hl-tl-section {
+  text-align: center;
+  margin: 0 auto 32px;
+  padding-top: 24px;
+  clear: both;
+}
+.hl-tl-section-label {
+  display: inline-block;
+  border: 1px solid var(--gold);
+  padding: 6px 20px;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--cinnabar);
+  font-weight: 600;
+  border-radius: 2px;
+  margin-bottom: 6px;
+  background: rgba(255,255,255,0.3);
+}
+.hl-tl-section h3 {
+  font-family: var(--title-font);
+  font-size: clamp(16px, 1.8vw, 24px);
+  color: var(--ink);
+  letter-spacing: 4px;
+  margin-bottom: 6px;
+}
+.hl-tl-section p {
+  font-size: 12px;
+  color: var(--ink-dim);
+  line-height: 1.8;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.hl-tl-entry {
+  position: relative;
+  width: 50%;
+  padding: 0 40px 36px 0;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.hl-tl-entry.is-visible { opacity: 1; transform: translateY(0); }
+.hl-tl-entry:nth-child(odd) {
+  float: left; clear: left; text-align: right;
+  padding: 0 40px 36px 0;
+}
+.hl-tl-entry:nth-child(even) {
+  float: right; clear: right; text-align: left;
+  padding: 0 0 36px 40px;
+}
+.hl-tl-entry::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2.5px solid var(--cinnabar);
+  z-index: 2;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.hl-tl-entry:nth-child(odd)::before { right: -6px; }
+.hl-tl-entry:nth-child(even)::before { left: -6px; }
+.hl-tl-entry:hover::before {
+  transform: scale(1.35);
+  box-shadow: 0 0 0 5px rgba(184,56,42,0.12);
+}
+.hl-tl-chip {
+  display: inline-block;
+  font-size: 10px;
+  color: var(--cinnabar);
+  border: 1px solid rgba(184,56,42,0.2);
+  padding: 1px 8px;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  background: rgba(184,56,42,0.04);
+  border-radius: 2px;
+}
+.hl-tl-entry:nth-child(even) .hl-tl-chip { float: left; clear: both; }
+.hl-tl-entry:nth-child(odd) .hl-tl-chip { float: right; clear: both; }
+.hl-tl-entry h4 {
+  font-family: var(--title-font);
+  font-size: 15px;
+  color: var(--ink-deep);
+  letter-spacing: 1px;
+  margin-bottom: 3px;
+  line-height: 1.5;
+}
+.hl-tl-entry:nth-child(even) h4 { text-align: left; }
+.hl-tl-entry:nth-child(odd) h4 { text-align: right; }
+.hl-tl-desc {
+  font-size: 12px;
+  color: var(--ink-dim);
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+}
+.hl-tl-entry:nth-child(even) .hl-tl-desc { text-align: left; }
+.hl-tl-entry:nth-child(odd) .hl-tl-desc { text-align: right; }
+.hl-tl-poem {
+  clear: both;
+  text-align: center;
+  padding: 40px 24px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.hl-tl-poem::before, .hl-tl-poem::after {
+  content: '◆';
+  display: block;
+  font-size: 10px;
+  color: var(--gold);
+  opacity: 0.4;
+  margin: 0 auto;
+}
+.hl-tl-poem .verse {
+  font-family: var(--title-font);
+  font-size: clamp(16px, 2vw, 22px);
+  color: var(--ink-dim);
+  line-height: 1.7;
+  padding: 16px 0;
+}
+.hl-tl-poem .source {
+  color: var(--ink-faint);
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+.hl-tl-footer {
+  clear: both;
+  text-align: center;
+  padding: 24px 24px 10px;
+  color: var(--ink-faint);
+  font-size: 11px;
+  letter-spacing: 2px;
+  border-top: 1px solid rgba(176,136,56,0.15);
+  max-width: 500px;
+  margin: 0 auto;
+}
+.timeline::after { content: ''; display: table; clear: both; }
+@media (max-width: 760px) {
+  .hl-timeline::before { left: 18px; }
+  .hl-tl-entry, .hl-tl-entry:nth-child(odd), .hl-tl-entry:nth-child(even) {
+    width: 100%; float: none; clear: both;
+    padding: 0 0 28px 42px; text-align: left;
+  }
+  .hl-tl-entry::before, .hl-tl-entry:nth-child(odd)::before, .hl-tl-entry:nth-child(even)::before {
+    left: 12px; right: auto;
+  }
+  .hl-tl-desc, .hl-tl-entry:nth-child(odd) .hl-tl-desc,
+  .hl-tl-entry:nth-child(even) .hl-tl-desc { text-align: left; }
+  .hl-tl-chip, .hl-tl-entry:nth-child(odd) .hl-tl-chip,
+  .hl-tl-entry:nth-child(even) .hl-tl-chip { float: none; display: inline-block; }
+  .hl-tl-entry h4, .hl-tl-entry:nth-child(odd) h4,
+  .hl-tl-entry:nth-child(even) h4 { text-align: left; }
+}
+.hl-primary-btn {
+  position: relative;
+  overflow: hidden;
+}
+.hl-primary-btn .ink-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  width: 100px; height: 100px;
+  margin-top: -50px;
+  margin-left: -50px;
+  transform: scale(0);
+  animation: inkRipple 0.6s ease-out;
+  pointer-events: none;
+}
+
+/* --- 19. 金线勾边 (Gold Thread Edges) ---
+   Decorative gold border on primary elements */
+.hl-primary-btn {
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.08) inset,
+    0 2px 8px rgba(184,56,42,0.2);
+}
+
+/* --- 20. 书卷底纹 (Scroll Backing) --- */
+.hl-residence-card {
+  background:
+    linear-gradient(90deg, rgba(248,242,234,0.02) 0%, transparent 3%, transparent 97%, rgba(248,242,234,0.02) 100%),
+    linear-gradient(162deg, rgba(248,242,234,0.85), rgba(240,230,216,0.6));
+}
+
+/* --- 21. 墨色渐变线 (Ink Gradient Dividers) ---
+   Decorative section dividers with ink-wash fade */
+.hl-section-head::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--cinnabar) 0%, var(--border-subtle) 30%, transparent 100%);
+  opacity: 0.3;
+}
+.hl-section-head {
+  position: relative;
+}
+
+/* --- 22. 宣纸毛边 (Deckle Edge Effect) --- */
+.hl-header {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.6),
+    inset 1px 0 0 rgba(44,36,24,0.03),
+    inset -1px 0 0 rgba(44,36,24,0.03),
+    var(--shadow-card);
+}
+
+/* --- 23. 朱砂批注线 (Cinnabar Annotation Lines) --- */
+.hl-side-desc {
+  box-shadow: inset 2px 0 0 var(--cinnabar);
+}
+
+/* --- 24. 墨晕 (Ink Halo Effect) --- */
+.hl-residence-card:hover::after {
+  opacity: 0.15;
+  transition: opacity .4s;
+}
 </style>
 </head>
 <body>
 <div class="hl-page">
+  <div class="hl-corner hl-corner-tl"></div>
+  <div class="hl-corner hl-corner-tr"></div>
+  <div class="hl-corner hl-corner-bl"></div>
+  <div class="hl-corner hl-corner-br"></div>
   <header class="hl-header">
     <div class="hl-kicker">Hong Lou Meng Atlas</div>
     <h1 class="hl-title">红楼梦人物关系与大观园图谱</h1>
-    <p class="hl-subtitle">以人物关系为经，以园林居所为纬，将贾府谱系、诸钗住所与命运线索并置浏览。</p>
+    <p class="hl-subtitle">以人物关系为经，以园林居所为纬，以事件时间为轴，将贾府谱系、诸钗住所与命运线索并置浏览。</p>
     <div class="hl-header-tools">
       <form class="hl-search" id="hlSearchForm">
-        <input id="hlGlobalSearch" type="search" autocomplete="off" placeholder="搜索人物、住所或区域，如：贾宝玉、潇湘馆、大观园">
-        <button class="hl-primary-btn" type="submit">检索</button>
+        <input id="hlGlobalSearch" type="search" autocomplete="off" placeholder="搜索人物、住所、事件，如：贾宝玉、潇湘馆、元春省亲、大观园">
+        <button class="hl-search-btn" type="button" id="hlSearchBtn" aria-label="搜索">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="hl-primary-btn" type="submit">检索<span class="ink-ripple"></span></button>
       </form>
       <div class="hl-quick-hint" id="hlSearchHint">可点击人物节点、住所人物标签与联动索引互相跳转</div>
     </div>
@@ -537,11 +1166,12 @@ button.hl-occupant-tag:hover { color: var(--cinnabar); border-color: var(--cinna
   <nav class="hl-tabs" aria-label="图谱视图切换">
     <button class="hl-tab-button is-active" type="button" data-tab="character">人物关系</button>
     <button class="hl-tab-button" type="button" data-tab="residence">大观园住所</button>
+    <button class="hl-tab-button" type="button" data-tab="timeline">大事时间线</button>
     <button class="hl-tab-button" type="button" data-tab="overview">联动总览</button>
   </nav>
 
   <main>
-    <section class="hl-panel is-active" id="hlCharacterPanel" data-panel="character">
+    <section class="hl-panel is-active hl-character-panel" id="hlCharacterPanel" data-panel="character">
       <div class="hl-character-layout">
         <div class="hl-graph-stage">
           <div class="hl-graph-toolbar">
@@ -583,6 +1213,213 @@ button.hl-occupant-tag:hover { color: var(--cinnabar); border-color: var(--cinna
       </div>
     </section>
 
+    <section class="hl-panel" id="hlTimelinePanel" data-panel="timeline">
+      <div class="hl-timeline-panel">
+        <h2 class="hl-timeline-title">红楼梦大事时间线</h2>
+        <p class="hl-timeline-sub">前八十回为主 · 后四十回为续 · 滚动可逐条呈现</p>
+
+        <div class="hl-timeline" id="hlTimeline">
+
+          <div class="hl-tl-section">
+            <div class="hl-tl-section-label">前五回 — 序幕</div>
+            <h3>前五回 — 序幕 · 太虚幻境</h3>
+            <p>女娲补天、宝黛前世、贾府初现、太虚幻境判词——前五回为全书立下神话框架，金陵十二钗命运的种子已悉数埋下。</p>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第一回</div>
+            <h4>女娲补天 · 木石前盟</h4>
+            <div class="hl-tl-desc">女娲炼石补天，剩一石弃于青埂峰下，后化为通灵宝玉。神瑛侍者以甘露灌溉绛珠仙草，草誓以泪偿还，遂有"木石前盟"。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第一回</div>
+            <h4>甄士隐出家 · 贾雨村发迹</h4>
+            <div class="hl-tl-desc">甄士隐失女遭灾，遇跛足道人唱《好了歌》后顿悟出家。贾雨村受甄士隐资助赴京赶考，金榜题名，从此踏入仕途。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第三回</div>
+            <h4>林黛玉进贾府</h4>
+            <div class="hl-tl-desc">黛玉丧母后投奔外祖母。"两弯似蹙非蹙罥烟眉，一双似喜非喜含情目"——宝黛初次会面，宝玉摔玉，黛玉暗自垂泪。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第四回</div>
+            <h4>葫芦僧判案 · 护官符</h4>
+            <div class="hl-tl-desc">贾雨村乱判薛蟠打死冯渊一案。门子献"护官符"，揭示贾、史、王、薛四大家族"一损俱损、一荣俱荣"的权力网络。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第五回</div>
+            <h4>梦游太虚幻境</h4>
+            <div class="hl-tl-desc">宝玉在秦可卿房中入梦，游太虚幻境，观金陵十二钗正册、副册，听《红楼梦》十二支曲，全书女子命运在此埋下判词伏笔。</div>
+          </div>
+
+          <div class="hl-tl-section">
+            <div class="hl-tl-section-label">第13-18回 — 初创</div>
+            <h3>第13-18回 — 初创 · 大观园建造</h3>
+            <p>秦可卿之死引出凤姐治家才干，元春晋封催生大观园，省亲盛典将贾府权势推至顶点——繁华至此开幕。</p>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第十三回</div>
+            <h4>秦可卿之死</h4>
+            <div class="hl-tl-desc">宁国府重孙媳妇秦可卿病亡，停灵七七四十九日。王熙凤受命协理宁国府，施展治家才干，赏罚分明。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第十六回</div>
+            <h4>元春晋封 · 大观园建造</h4>
+            <div class="hl-tl-desc">贾元春晋封贤德妃，贾府倾尽财力建造省亲别院——大观园，园中亭台楼阁极尽奢华。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第十八回</div>
+            <h4>元春省亲</h4>
+            <div class="hl-tl-desc">元宵夜元春回府省亲，大观园内灯火辉煌。元春命姊妹及宝玉入园题咏，之后命众人搬入园中居住，大观园故事正式拉开帷幕。</div>
+          </div>
+
+          <div class="hl-tl-section">
+            <div class="hl-tl-section-label">第23-44回 — 鼎盛</div>
+            <h3>第23-44回 — 鼎盛 · 大观园之春</h3>
+            <p>宝黛共读西厢、黛玉葬花、宝玉挨打、刘姥姥游园——大观园最美的春夏之交，群芳绽放，却也暗藏秋意。</p>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第二十三回</div>
+            <h4>宝黛共读西厢</h4>
+            <div class="hl-tl-desc">宝玉携《会真记》在沁芳闸桥边读，被黛玉撞见。二人共读，情窦初开。黛玉听得"花落水流红，闲愁万种"而心动神摇。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第二十七回</div>
+            <h4>黛玉葬花</h4>
+            <div class="hl-tl-desc">黛玉夜访怡红院被晴雯误拒门外，感怀身世。次日扫落花葬于花冢，哭吟《葬花吟》——"花谢花飞花满天，红消香断有谁怜"。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第三十三回</div>
+            <h4>宝玉挨打</h4>
+            <div class="hl-tl-desc">忠顺王府上门索要琪官（蒋玉菡），金钏投井事件火上浇油。贾政痛打宝玉几乎致死，惊动贾母。宝玉养伤时，宝钗黛玉先后探望，情感暗流涌动。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第三十九回</div>
+            <h4>刘姥姥二进荣国府</h4>
+            <div class="hl-tl-desc">刘姥姥携瓜果二进荣府，贾母留她逛大观园。史太君两宴大观园，众人行酒令、品茄鲞、游蘅芜苑潇湘馆，欢声笑语中尽显繁华盛景。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第四十四回</div>
+            <h4>凤姐泼醋 · 平儿理妆</h4>
+            <div class="hl-tl-desc">凤姐生日宴撞破贾琏与鲍二媳妇偷情，撒泼哭闹，错打平儿。平儿受委屈后被宝玉请入怡红院理妆——群芳中最为隐忍者的高光瞬间。</div>
+          </div>
+
+          <div class="hl-tl-section">
+            <div class="hl-tl-section-label">第46-62回 — 理家</div>
+            <h3>第46-62回 — 理家 · 探春兴利除弊</h3>
+            <p>鸳鸯抗婚不屈、香菱苦吟学诗、探春承包改革、群芳夜宴掣签——风雨将至前最后一次从容，乐中有悲。</p>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第四十六回</div>
+            <h4>鸳鸯抗婚</h4>
+            <div class="hl-tl-desc">贾赦欲强纳鸳鸯为妾，鸳鸯当众剪发誓死不从，惊动贾母。贾母斥责贾赦夫妇，鸳鸯在贾母庇护下暂得安宁。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第四十八回</div>
+            <h4>香菱学诗</h4>
+            <div class="hl-tl-desc">香菱随薛家进大观园，拜黛玉为师学诗。"精华欲掩料应难，影自娟娟魄自寒"——苦吟三稿而成，被众人称赞，大观园中最纯真的文学时刻。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第五十五回</div>
+            <h4>探春兴利除弊</h4>
+            <div class="hl-tl-desc">凤姐小产，探春、李纨、宝钗三人代理家务。探春革除重复支出、实行大观园承包责任制——将竹林稻田花圃分包给老妈妈们，开源节流。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第五十七回</div>
+            <h4>紫鹃试玉</h4>
+            <div class="hl-tl-desc">紫鹃诓宝玉说黛玉要回苏州，宝玉信以为真，急痛攻心，痴病大发——众人方知宝玉心中黛玉无可替代的位置。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第六十三回</div>
+            <h4>寿怡红群芳开夜宴</h4>
+            <div class="hl-tl-desc">宝玉生日夜宴，黛玉、宝钗、探春、湘云等聚在怡红院掣花名签行酒令。宝钗签"艳冠群芳"，黛玉签"风露清愁"——大观园最后的狂欢。</div>
+          </div>
+
+          <div class="hl-tl-section">
+            <div class="hl-tl-section-label">第65-78回 — 衰变</div>
+            <h3>第65-78回 — 衰变 · 由盛转衰</h3>
+            <p>尤二姐吞金、抄检大观园、晴雯屈死——贾府内部秩序崩溃的连锁反应，理想国已成昨日之事。</p>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第六十五回</div>
+            <h4>尤二姐吞金</h4>
+            <div class="hl-tl-desc">贾琏偷娶尤二姐，凤姐设计将其接进大观园，明里殷勤暗里折磨。尤二姐受尽欺辱，腹中胎儿被胡庸医打落后吞金自尽——凤姐最狠辣的一笔。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第七十四回</div>
+            <h4>抄检大观园</h4>
+            <div class="hl-tl-desc">绣春囊事件引发大抄检。王善保家的仗势欺人，凤姐被迫带队搜检各处。晴雯被逐、司棋被撵、入画被查——大观园理想秩序的崩塌。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">第七十八回</div>
+            <h4>晴雯屈死 · 宝玉作诔</h4>
+            <div class="hl-tl-desc">晴雯被王夫人逐出后病亡，宝玉作《芙蓉女儿诔》祭之——"茜纱窗下，我本无缘；黄土垄中，卿何薄命"。黛玉听后面色改变。</div>
+          </div>
+
+          <div class="hl-tl-section">
+            <div class="hl-tl-section-label">后四十回 — 终局</div>
+            <h3>后四十回 — 终局 · 白茫茫大地真干净</h3>
+            <p>元春薨逝、贾府被抄、黛玉焚稿断痴情、宝玉悬崖撒手——千红一哭，万艳同悲，落了片白茫茫大地真干净。</p>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">后四十回</div>
+            <h4>迎春误嫁 · 香菱受屈</h4>
+            <div class="hl-tl-desc">迎春嫁孙绍祖，备受虐待折磨而死——"一载赴黄梁"。香菱在薛蟠婚后被夏金桂虐待，终至血竭而亡。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">后四十回</div>
+            <h4>元春薨逝 · 探春远嫁</h4>
+            <div class="hl-tl-desc">元春暴病薨逝，贾府失去最大靠山。探春远嫁海疆，骨肉分离——"一帆风雨路三千，把骨肉家园齐来抛闪"。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">后四十回</div>
+            <h4>贾府被抄 · 贾母逝世</h4>
+            <div class="hl-tl-desc">贾府被锦衣军查抄，革去世职，家产尽没。贾母散余资保全家族后，寿终正寝。昔日"白玉为堂金作马"的繁华，到此散尽。</div>
+          </div>
+
+          <div class="hl-tl-entry" data-tl-observe>
+            <div class="hl-tl-chip">后四十回</div>
+            <h4>黛玉焚稿 · 宝玉出家</h4>
+            <div class="hl-tl-desc">宝玉宝钗大婚之日，黛玉焚诗稿、断痴情，泪尽而亡——"香魂一缕随风散"。宝玉中举后，一僧一道挟之飘然出家，白茫茫大地真干净。</div>
+          </div>
+
+        </div>
+
+        <div class="hl-tl-poem">
+          <div class="verse">好一似食尽鸟投林，<br>落了片白茫茫大地真干净。</div>
+          <div class="source">——《红楼梦》· 飞鸟各投林</div>
+        </div>
+
+        <div class="hl-tl-footer">
+          前八十回曹雪芹著 · 后四十回通行本为高鹗续<br>
+          金陵十二钗 · 千红一哭 · 万艳同悲
+        </div>
+      </div>
+    </section>
+
     <section class="hl-panel" id="hlOverviewPanel" data-panel="overview">
       <div class="hl-overview">
         <h2 class="hl-section-title">人物—住所联动总览</h2>
@@ -597,7 +1434,7 @@ button.hl-occupant-tag:hover { color: var(--cinnabar); border-color: var(--cinna
 
 <script>
 const HonglouApp = window.HonglouApp = {};
-HonglouApp.state = { activeTab: 'character', graphReady: false, residenceReady: false, overviewReady: false, toastTimer: null };
+HonglouApp.state = { activeTab: 'character', graphReady: false, residenceReady: false, timelineReady: false, overviewReady: false, toastTimer: null };
 HonglouApp.utils = {
   escapeHtml(value) {
     return String(value ?? '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
@@ -805,6 +1642,8 @@ HonglouApp.characterGraph = (() => {
   { id: '多姑娘', name: '多姑娘', group: 12, gen: 3, generation: "玉字辈", desc: '多浑虫之妻', importance: 1 },
   { id: '夏婆子', name: '夏婆子', group: 12, gen: 2, generation: "文字辈", desc: '大观园婆子', importance: 1 },
   { id: '王善保家的', name: '王善保家的', group: 12, gen: 2, generation: "文字辈", desc: '邢夫人陪房，建议抄检大观园', importance: 1 },
+  { id: '春燕', name: '春燕', group: 7, gen: 3, generation: "玉字辈", desc: '怡红院小丫鬟，芳官好友，其母何婆子亦在大观园当差', importance: 1 },
+  { id: '何婆子', name: '何婆子', group: 7, gen: 2, generation: "文字辈", desc: '春燕之母，大观园中低级仆妇', importance: 1 },
 ];
   const nodes = allNodes.filter(n => !n.hidden);
   const links = [
@@ -1034,6 +1873,10 @@ HonglouApp.characterGraph = (() => {
   { source: '贾赦', target: '贾敕', relation: '族兄弟' },
   { source: '贾政', target: '贾效', relation: '族兄弟' },
   { source: '贾赦', target: '贾敦', relation: '族兄弟' },
+  { source: '贾琏', target: '平儿', relation: '通房' },
+  { source: '贾宝玉', target: '春燕', relation: '主仆' },
+  { source: '春燕', target: '芳官', relation: '好友' },
+  { source: '春燕', target: '何婆子', relation: '母女' },
 ];
   let svg, rootLayer, bandLayer, gridLayer, linkLayer, linkLabelLayer, nodeLayer, generationLabelLayer;
   let simulation, linkGroup, linkLabelGroup, nodeGroup, zoomBehavior;
@@ -1108,6 +1951,7 @@ HonglouApp.characterGraph = (() => {
       .data(links)
       .join('text')
       .attr('class', 'link-label')
+      .attr('text-anchor', 'middle')
       .text(d => d.relation);
 
     nodeGroup = nodeLayer.selectAll('g')
@@ -1135,6 +1979,16 @@ HonglouApp.characterGraph = (() => {
       .attr('fill', d => colorScale(d.group))
       .attr('stroke', d => isMajorFemale(d) || d.name === '贾宝玉' ? '#e4c979' : 'rgba(245,235,210,0.78)')
       .attr('stroke-width', d => d.name.includes('黛玉') || d.name.includes('宝钗') || d.name === '贾宝玉' ? 3 : 1.5);
+
+    nodeGroup.append('rect')
+      .attr('x', d => 8 + (d.importance || 1) * 2)
+      .attr('y', d => -7 - (d.importance || 1) * 0.8)
+      .attr('width', d => d.name.length * (d.importance >= 4 ? 12 : 11) + 10)
+      .attr('height', d => 14 + (d.importance || 1) * 1.5)
+      .attr('rx', 3)
+      .attr('fill', d => colorScale(d.group))
+      .attr('opacity', 0.5)
+      .attr('stroke', 'none');
 
     nodeGroup.append('text')
       .attr('dx', d => 10 + (d.importance || 1) * 2)
@@ -1675,7 +2529,7 @@ HonglouApp.residenceMap = (() => {
     { id: 'yuanwai', name: '园外要地', desc: '贾府之外，与人物命运交织的重要场所。' }
   ];
   const residences = [
-    { id: 'yihongyuan', area: 'daguanyuan', name: '怡红院', location: '园之东南，富丽堂皇', accent: '#c9403b', desc: '“怡红快绿”匾额题名，宝玉自号“怡红公子”。', residents: [{name:'贾宝玉',type:'master'}, {name:'袭人',type:'maid'}, {name:'晴雯',type:'maid'}, {name:'麝月',type:'maid'}, {name:'秋纹',type:'maid'}, {name:'碧痕',type:'maid'}, {name:'芳官',type:'maid'}, {name:'四儿',type:'maid'}, {name:'茗烟',label:'茗烟（小厮）'}] },
+    { id: 'yihongyuan', area: 'daguanyuan', name: '怡红院', location: '园之东南，富丽堂皇', accent: '#c9403b', desc: '“怡红快绿”匾额题名，宝玉自号“怡红公子”。', residents: [{name:'贾宝玉',type:'master'}, {name:'袭人',type:'maid'}, {name:'晴雯',type:'maid'}, {name:'麝月',type:'maid'}, {name:'秋纹',type:'maid'}, {name:'碧痕',type:'maid'}, {name:'芳官',type:'maid'}, {name:'四儿',type:'maid'}, {name:'春燕',type:'maid'}, {name:'茗烟',label:'茗烟（小厮）'}] },
     { id: 'xiaoxiangguan', area: 'daguanyuan', name: '潇湘馆', location: '园之西南，翠竹掩映', accent: '#7a9e3b', desc: '“有凤来仪”千竿翠竹，黛玉自号“潇湘妃子”。', residents: [{name:'林黛玉',type:'master'}, {name:'紫鹃',type:'maid'}, {name:'雪雁',type:'maid'}] },
     { id: 'hengwuyuan', area: 'daguanyuan', name: '蘅芜苑', location: '园之西北，山石清冷', accent: '#4a8ab8', desc: '“蘅芷清芬”奇草仙藤，宝钗自号“蘅芜君”。', residents: [{name:'薛宝钗',type:'master'}, {name:'莺儿',type:'maid'}, {name:'文杏',type:'maid'}] },
     { id: 'daoxiangcun', area: 'daguanyuan', name: '稻香村', location: '园之东北，田园风光', accent: '#c49a20', desc: '“杏帘在望”纸窗木榻，李纨课子之所。', residents: [{name:'李纨',type:'master'}, {name:'贾兰',type:'master'}, {name:'素云',type:'maid'}, {name:'碧月',type:'maid'}] },
@@ -1734,6 +2588,10 @@ HonglouApp.residenceMap = (() => {
     }).join('');
     return `
       <article class="hl-residence-card" id="residence-${residence.id}" data-residence-id="${residence.id}" style="--residence-accent:${residence.accent}">
+        <div class="hl-lattice-corner hl-lattice-tl"></div>
+        <div class="hl-lattice-corner hl-lattice-tr"></div>
+        <div class="hl-lattice-corner hl-lattice-bl"></div>
+        <div class="hl-lattice-corner hl-lattice-br"></div>
         <h3 class="hl-residence-name">${HonglouApp.utils.escapeHtml(residence.name)}</h3>
         <div class="hl-residence-loc">${HonglouApp.utils.escapeHtml(residence.location)}</div>
         <p class="hl-residence-desc">${HonglouApp.utils.escapeHtml(residence.desc)}</p>
@@ -1820,6 +2678,23 @@ HonglouApp.ui = (() => {
       event.preventDefault();
       performSearch(document.getElementById('hlGlobalSearch').value);
     });
+    document.getElementById('hlSearchBtn').addEventListener('click', () => {
+      document.getElementById('hlSearchForm').requestSubmit();
+    });
+    document.querySelectorAll('.hl-primary-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const ripple = this.querySelector('.ink-ripple');
+        if (!ripple) return;
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.style.animation = 'none';
+        ripple.offsetHeight;
+        ripple.style.animation = 'inkRipple 0.6s ease-out';
+      });
+    });
     document.body.addEventListener('click', event => {
       const character = event.target.closest('[data-jump-character]');
       if (character) {
@@ -1840,6 +2715,7 @@ HonglouApp.ui = (() => {
       setTimeout(() => HonglouApp.characterGraph.resize(), 80);
     }
     if (tabName === 'residence') HonglouApp.residenceMap.render();
+    if (tabName === 'timeline') initTimeline();
     if (tabName === 'overview') renderOverview();
   }
 
@@ -1950,7 +2826,36 @@ HonglouApp.ui = (() => {
     HonglouApp.state.toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 2200);
   }
 
-  return { bind, switchTab, performSearch, jumpToCharacter, jumpToResidence, showCharacterDetail, showResidenceDetail, showDefaultDetail, showToast };
+  function initTimeline() {
+    if (HonglouApp.state.timelineReady) return;
+    HonglouApp.state.timelineReady = true;
+    // Observe timeline entries for scroll-fade
+    const entryObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          entryObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('#hlTimeline [data-tl-observe]').forEach(el => entryObserver.observe(el));
+    // Observe section headers for scroll-fade
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          sectionObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('#hlTimeline .hl-tl-section').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transition = 'opacity 0.8s ease';
+      sectionObserver.observe(el);
+    });
+  }
+
+  return { bind, switchTab, performSearch, jumpToCharacter, jumpToResidence, showCharacterDetail, showResidenceDetail, showDefaultDetail, showToast, initTimeline };
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
